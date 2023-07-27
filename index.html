@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="main.js" defer></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/3481f02be2.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <section id="container">
+        <section class="header">
+            <i class="fa-solid fa-check-double"></i>
+            ToDo
+        </section>
+        <section class="content">
+            <!-- NAV BAR -->
+            <div class="nav-bar">
+                <div class="due-date-container">
+                    <ul class="due-dates" data-due-dates>
+                        <li class="date" id="all-tasks" data-all-tasks>
+                            <i class="fa-regular fa-calendar-days"></i>
+                            All</li>
+                        <li class="date" id="today-tasks" data-today-tasks>
+                            <i class="fa-solid fa-calendar-day"></i>
+                            Today</li>
+                        <li class="date" id="weekly-tasks" data-weekly-tasks>
+                            <i class="fa-solid fa-calendar-week"></i>
+                            Week</li>
+                        <li class="date" id="important-tasks" data-important-tasks>
+                            <i class="fa-regular fa-calendar-days"></i>
+                            Important</li>
+                        <li class="date" id="completed-tasks" data-completed-tasks>
+                            <i class="fa-regular fa-calendar-check"></i>
+                            Completed</li>
+                    </ul>
+                </div>
+                <div class="projects">
+                    <div class="projects-header">
+                        <h5 class="projects-title">Projects (2)</h5>
+                        <i class="fa-solid fa-circle-plus" data-add-project-btn></i>
+                    </div>
+                    <hr>
+                    <div class="projects-container" data-project-container>
+                        <div class="project">
+                            <div class="project-content">
+                                <i class="fa-solid fa-gear"></i>
+                                <p class="project-label">sample project</p>
+                            </div>
+                            <div class="editables">
+                                <i class="fa-regular fa-pen-to-square icon-editable"></i>
+                                <i class="fa-solid fa-trash icon-editable"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="credits-container">
+                        <div class="credit">Crafted by <span class="clr-name">Newiie</span></div>
+                        <div class="credit">Credits for <span class="clr-name">mooniiDev</span> for Design</div>
+                    </div>
+                </div>
+            </div>
+            <!-- CONTENT -->
+            
+        </section>
+        <div class="todo-container">
+            <h1 class="todo-header" data-todo-header>Craft Another Project</h1>
+
+            <div class="todo-body">
+                <div class="task-header-container">
+                    <div class="task-header">Tasks (2)</div>
+                    <i class="fa-solid fa-circle-plus check" data-add-task></i>
+                </div>
+                <hr>
+                <div class="tasks-container" data-task-container>
+                    <!-- <div class="task">
+                        <div class="task-content">
+                            <input type="checkbox" name="" id="">
+                            <p>Enjoy my tea as much as my coding!</p>
+                        </div>
+                        
+                        <div class="task-icon">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                            <i class="fa-regular fa-trash-can"></i>
+                            <i class="fa-solid fa-circle-info"></i>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="add-project" data-add-project-container>
+            <div class="ap-body">
+                <div class="add-project-title">
+                    <h2>Add Project</h2>
+                    <i class="fa-solid fa-xmark apbody-close-btn" data-close-project-btn></i>
+                </div>
+                <div class="add-project-input">
+                    <label for="title">Title*</label>
+                    <input type="text" name="title" id="title" data-add-project-text-title>
+                </div>
+                <div class="add-project-icon-container">
+                    <p>Icon</p>
+                    <div class="icons" data-icons-container>
+                        <div class="icon" id="fa-book"><i class="fa-solid fa-book"></i></div>
+                        <div class="icon" id="fa-hammer"><i class="fa-solid fa-hammer"></i></div>
+                        <div class="icon" id="fa-volleyball"><i class="fa-solid fa-volleyball"></i></div>
+                        <div class="icon" id="fa-sack-dollar"><i class="fa-solid fa-sack-dollar"></i></div>
+                        <div class="icon" id="fa-pizza-slice"><i class="fa-solid fa-pizza-slice"></i></div>
+                        <div class="icon" id="fa-school"><i class="fa-solid fa-school"></i></div>
+                        <div class="icon" id="fa-gift"><i class="fa-solid fa-gift"></i></div> 
+                    </div>
+                </div>
+                <hr>
+                <div class="add-project-btns">
+                    <button class="cancel-btn" data-ap-cancel-btn>Cancel</button>
+                    <button class="add-btn" data-ap-add-btn>Add</button>
+                </div>
+            </div>
+        </div>
+        <div class="add-task-container" data-add-task-container>
+            <div class="add-task-body">
+                <div class="add-project-title">
+                    <h2 data-project-title>Add Task</h2>
+                    <i class="fa-solid fa-xmark apbody-close-btn" data-at-close-btn></i>
+                </div>
+                <form class="task-form" action="" data-task-form>
+                    <label for="task-title">Title*</label>
+                    <input type="text" name="task-title" id="task-title" data-task-title>
+                    <label for="task-description">Description</label>
+                    <input type="textarea" name="task-description" id="task-description" data-task-description>
+                    <label for="task-date">Due Date</label>
+                    <input type="date" name="task-date" id="task-date" data-task-date>
+                    <label for="task-priority">Priority</label>
+                    <select name="" id="" data-task-priority>
+                        <option value="notimportant">Not Important At All</option>
+                        <option value="abitimportant">A bit Important</option>
+                        <option value="important">Very Important</option>
+                    </select>
+                    <hr>
+                    <div class="add-project-btns">
+                        <button type="button" class="cancel-btn" data-at-cancel-btn>Cancel</button>
+                        <button class="add-btn" data-add-task-btn>Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="delete-modal" data-delete-modal>
+            <div class="delete-modal-body">
+                <div class="dm-header-container">
+                    <h2>Delete Project</h2>
+                    <i class="fa-solid fa-xmark dm-close-btn" data-dm-close-button></i>
+                </div>
+                <div class="dm-content">
+                    <p>Are you sure?</p>
+                    <p >Project <span class="dm-label"></span> will be gone forever!</p>
+                    <hr>
+                    <div class="dm-btns">
+                        <button class="cancel-btn" data-dm-cancel-btn>Cancel</button>
+                        <button class="delete-btn" data-dm-delete-btn>Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <template id="project-template">
+        <div class="project">
+            <div class="project-content">
+                <!-- <i class="fa-solid fa-gear"></i> -->
+                <p class="project-label"></p>
+            </div>
+            <div class="editables">
+                <i class="fa-regular fa-pen-to-square icon-editable" data-project-edit></i>
+                <i class="fa-solid fa-trash icon-editable" data-project-delete-btn></i>
+            </div>
+        </div>
+    </template>
+
+    <template id="task-template">
+        <div class="task" data-task-body>
+            <div class="task-content">
+                <input type="checkbox" name="" id="" data-task-checkbox>
+                <p data-task-description></p>
+            </div>
+            
+            <div class="task-icon">
+                <i class="fa-regular fa-pen-to-square" data-task-edit></i>
+                <i class="fa-regular fa-trash-can" data-task-delete></i>
+                <i class="fa-solid fa-circle-info" data-task-info></i>
+            </div>
+        </div>
+    </template>
+</body>
+</html>
