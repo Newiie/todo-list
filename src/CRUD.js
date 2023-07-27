@@ -123,7 +123,7 @@ export const editTask = () => {
 }
 
 export const selectProject = (selected) => {
-    selectedProject = selected;
+    selectedProject = document.getElementById(selected.id);
 }
 
 export const deleteTask = () => {

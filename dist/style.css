@@ -168,6 +168,59 @@
   position: relative;
 }
 
+.todo-container, .content {
+  z-index: 0;
+}
+
+.menu {
+  width: 1px;
+  aspect-ratio: 1;
+  opacity: 0;
+}
+@media (max-width: 50em) {
+  #container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+  }
+
+  .content {
+    position: absolute;
+    top: 0;
+    left: -300px;
+    z-index: -1;
+    padding-top: 3rem;
+    transition: .4s;
+  }
+
+  .content.active {
+    left: 0;
+  }
+  
+  .todo-body {
+    width: max(80%, 40px);
+    overflow: hidden;
+    box-shadow: 1px 1px 3px var(--clr--netural-900);
+  }
+
+  .todo-header {
+    font-size: 2rem;
+  }
+
+  .todo-container {
+    z-index: -2;
+  }
+
+  .menu {
+    padding: 5px;
+    margin-right: 2rem;
+    background-color: var(--clr--accent);
+    cursor: pointer;
+    opacity: 1;
+  }
+}
+
+
 .header {
   grid-area: header;
   background: linear-gradient(to right , var(--clr--accent), var(--clr--light-accent));
@@ -175,6 +228,9 @@
   padding: 1rem 2rem;
 }
 
+.todo-header {
+  text-align: center  ;
+}
 .nav-bar {
   grid-area: nav-bar;
   background-color: var(--clr--netural-900);
@@ -186,6 +242,9 @@
 
 .todo-container {
   grid-area: todo-container;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .date, .project {
@@ -251,7 +310,7 @@
 }
 
 .todo-body {
-  width: max(80%, 700px);
+  width: 80%;
 }
 
 hr {
@@ -557,3 +616,9 @@ select:focus {
 .dm-label {
   font-weight: bold;
 }
+
+.task:hover {
+  cursor: pointer;
+   background-color: var(--clr-grey);
+}
+

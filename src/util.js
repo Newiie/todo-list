@@ -1,4 +1,4 @@
-import { clearElement, projects, selectedProject, selectedTask } from "./CRUD";
+import { clearElement, projects, selectProject, selectedProject, selectedTask } from "./CRUD";
 import { renderProject, renderTask } from "./DOM";
 
 const taskContainer = document.querySelector("[data-task-container]");
@@ -40,7 +40,7 @@ export const populateEditTaskContainer = () => {
     const projectID =  selectedProject.getAttribute("id");
 
     const taskItem = projects.find(project => project.id == projectID).tasks.find(task => task.id == taskId);
-    console.log(taskItem);
+
     const taskForm = document.querySelector("[data-task-form");
     const taskTitle = taskForm.querySelector("[data-task-title]")
     const taskDescription = taskForm.querySelector("[data-task-description]");
@@ -72,4 +72,9 @@ export function saveAndRenderTask() {
     save()
     clearElement(taskContainer);
     project.tasks.forEach(task => renderTask(task));
+}
+
+export const findProject = (taskId) => {
+    const project = projects.find(project => project.tasks.find(task => task.id == taskId))
+    selectProject(project);
 }

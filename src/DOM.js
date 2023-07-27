@@ -1,6 +1,6 @@
 import { clearElement, createProject, deleteProject, selectProject, addTask, projects, selectedProject, infoEdit, selectedTask, editTask, deleteTask} from "./CRUD";
 import { AllTasks, TodayTask, TodayTasks, WeeklyTasks, completedTasks, importantTasks } from "./IMPORTANCE";
-import { clearInput, clearSelectedIcon, populateEditTaskContainer, saveAndRenderTask } from "./util";
+import { clearInput, clearSelectedIcon, findProject, populateEditTaskContainer, save, saveAndRenderTask } from "./util";
 
 const iconsContainer = document.querySelector("[data-icons-container]");
 const addProjectBtn = document.querySelector("[data-ap-add-btn]");
@@ -31,6 +31,8 @@ const weeklyTasksBtn = document.querySelector("[data-weekly-tasks]");
 const importantTasksBtn = document.querySelector("[data-important-tasks]");
 const completedTasksBtn = document.querySelector("[data-completed-tasks]");
 
+const menuBtn = document.querySelector("[data-menu-btn]")
+const headerDiv = document.querySelector("[data-nav-bar]")
 const dueDateEvents = () => {
     dueDates.addEventListener('click', (e) => {
         if (e.target.tagName.toLowerCase() == "li") {
@@ -66,6 +68,13 @@ const dueDateEvents = () => {
 }
 
 const addBtns = () => {
+
+    menuBtn.addEventListener('click', () => {
+        console.log(headerDiv)
+        console.log("went in")
+        headerDiv.classList.toggle("active");
+    })
+
     dmCloseBtn.addEventListener('click', () => {
         deleteModal.style.display = 'none'; 
     })
@@ -164,7 +173,7 @@ const iconsEvent = () => {
                 document.querySelector(".project-selected").classList.remove("project-selected");
             e.target.classList.add("project-selected");
 
-            selectProject(e.target);
+            selectedProject = e.target;
             saveAndRenderTask();
         }
     })
@@ -185,24 +194,40 @@ export const renderTask = (task) => {
     taskEditBtn.addEventListener('click', () => {
     
         const taskTitle = addTaskContainer.querySelector("[data-project-title]")
-        const taskEditBtn = addTaskContainer.querySelector("[data-add-task-btn]");
+        const taskFormEditBtn = addTaskContainer.querySelector("[data-add-task-btn]");
 
         clearInput(addTaskContainer);
         addTaskContainer.style.display = 'flex';
         taskTitle.textContent = 'Edit Task';
-        taskEditBtn.textContent = 'Edit';
+        taskFormEditBtn.textContent = 'Edit';
+        
+        selectedTask = taskEditBtn.closest("[data-task-body]");
+        findProject(taskEditBtn.closest("[data-task-body]").getAttribute("id"));
 
         populateEditTaskContainer();
     })
 
     taskDeleteBtn.addEventListener('click', () => {
-        deleteModal.style.display = 'flex';
+        deleteModal.style.display = 'flex'; 
         deleteModal.setAttribute("id", "task-deletion")
         const dmLabel = deleteModal.querySelector(".dm-label");
-        const taskId = selectedTask.getAttribute("id");
 
+        selectedTask = taskDeleteBtn.closest("[data-task-body]");
+        findProject(taskDeleteBtn.closest("[data-task-body]").getAttribute("id"));
+        
+        const taskId = selectedTask.getAttribute("id");
         const projectId = selectedProject.getAttribute("id");
         dmLabel.textContent = projects.find(project => project.id == projectId).tasks.find(task => task.id == taskId).title;
+    })
+
+    taskCheckBox.addEventListener('click', () => {
+        console.log('went in')
+        selectedTask = taskCheckBox.closest("[data-task-body]");
+        const taskId = selectedTask.getAttribute("id");
+        projects.find(project => project.tasks.find(task => {
+            task.id == taskId ? task.complete = taskCheckBox.checked : '';
+        }))
+        save();
     })
 
     taskElement.setAttribute("id", task.id);
