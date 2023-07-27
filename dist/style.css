@@ -1,0 +1,559 @@
+:root {
+    --clr--accent: #00b3bb;
+    --clr--light-accent: #00e6aa;
+    --clr--neutral-100: #fff;
+    --clr--netural-900: #F7F7F7;
+    --clr-dark-grey: #757575;
+    --clr-grey: rgba(192, 192, 192, 0.7);
+    --clr-dark-red: #C46161;
+    --clr-red: #E67B7B;
+
+    --ff-lato: 'Lato', sans-serif;
+    --ff-roboto: 'Roboto', sans-serif;
+
+    --size-100: 0.25rem;
+    --size-200: 0.5rem;
+    --size-300: 0.75rem;
+    --size-400: 1rem;
+    --size-500: 1.5rem;
+    --size-600: 2rem;
+    --size-700: 3rem;
+    --size-800: 4rem;   
+    --size-900: 5rem; 
+
+    --fw-regular: 400;
+    --fw-semi-bold: 500;
+    --fw-bold: 700;
+
+    --fs-300: 0.8125rem;
+    --fs-400: 1rem;
+    --fs-450: 1.0625rem;
+    --fs-500: 1.125rem;
+    --fs-550: 1.25rem;
+    --fs-600: 1.5625rem;
+    --fs-700: 1.875rem; 
+    --fs-800: 2rem;
+    --fs-900: 2.5rem;
+    --fs-950: 3.5rem;
+}
+
+
+@media (min-width: 50em) {
+    :root {
+      --fs-body: var(--fs-500);
+      --fs-primary-heading: var(--fs-900);
+      --fs-secondary-heading: var(--fs-800);
+      
+      --fs-nav: var(--fs-300);
+    }
+    
+  }
+  /* CSS RESET */
+  /* Box sizing rules */
+  *:not(i),
+  *::before:not(i),
+  *::after:not(i) {
+    font-family: "Open Sans Condensed";
+    box-sizing: border-box;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    font-family: var(--ff-roboto);
+  }
+  /* Remove default margin */
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  figure,
+  blockquote,
+  dl,
+  dd {
+    margin: 0;
+  }
+  
+  /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+  ul[role='list'],
+  ol[role='list'] {
+    list-style: none;
+  }
+  
+  /* Set core root defaults */
+  html:focus-within {
+    scroll-behavior: smooth;
+  }
+  
+  html,
+  body {
+    height: 100%;
+  }
+  /* Set core body defaults */
+  body {
+    text-rendering: optimizeSpeed;
+  }
+  
+  /* A elements that don't have a class get default styles */
+  a:not([class]) {
+    text-decoration-skip-ink: auto;
+  }
+  
+  /* Make images easier to work with */
+  img,
+  picture,
+  svg {
+    max-width: 100%;
+    display: block;
+  }
+  
+  /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+  @media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+     scroll-behavior: auto;
+    }
+    
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+/* 
+  --fs-400: 1rem;
+  --fs-450: 1.0625rem;
+  --fs-500: 1.125rem;
+  --fs-550: 1.25rem;
+  --fs-600: 1.5625rem; */
+
+.date, .project-label {
+    font-size: var(--fs-450);
+}
+
+.header {
+    font-size: var(--fs-600);
+    font-family: var(--ff-lato);
+}
+
+.projects-header, .task-header {
+    font-size: var(--fs-500);
+}
+
+.todo-header {
+  display: flex;
+  gap: 1rem;
+    font-size: var(--fs-900);
+}
+
+
+/* var */
+#container {
+  display: grid;
+  grid-template-areas: 
+  "header header header header"
+  "nav-bar todo-container todo-container todo-container "
+  "nav-bar todo-container todo-container todo-container "
+  "nav-bar todo-container todo-container todo-container "
+  ;
+  grid-template-rows: calc(2rem + 1.5625rem) repeat(3, 1fr);
+  grid-template-columns: 300px repeat(3,1fr);
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.header {
+  grid-area: header;
+  background: linear-gradient(to right , var(--clr--accent), var(--clr--light-accent));
+  color: var(--clr--neutral-100);
+  padding: 1rem 2rem;
+}
+
+.nav-bar {
+  grid-area: nav-bar;
+  background-color: var(--clr--netural-900);
+  padding: 2.5rem 1.5rem;
+  color: var(--clr-dark-grey);
+  height: max(calc(100vh - 8.5625rem), 100%);
+  overflow: scroll;
+}
+
+.todo-container {
+  grid-area: todo-container;
+}
+
+.date, .project {
+  /* width: 90%; */
+  background-color: var(--clr--neutral-100);
+  padding: 0.775rem 1rem;
+  border-radius: 0.5rem;
+  /* color: var(--clr--neutral-100); */
+  list-style: none;
+  cursor: pointer;
+}
+
+.date:hover,
+.project:hover {
+  outline: 1px solid var(--clr--accent);
+}
+.due-dates > *:not(:first-child) {
+  margin-top: 1rem;
+}
+
+.due-date-container {
+  margin-bottom: 5rem;
+}
+
+.projects-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+}
+
+.project {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.project-content {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.clr-name {
+  color: #00b3bb;
+}
+
+.credit {
+  margin: 5px;
+  cursor: pointer;
+}
+.credits-container {
+  text-align: center;
+}
+
+.todo-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 1.5rem;
+  gap: 5rem;  
+  color: var(--clr-dark-grey);
+}
+
+.todo-body {
+  width: max(80%, 700px);
+}
+
+hr {
+  margin-top: 1rem;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.task-content {
+  display: flex;
+  gap: 0.675rem;
+}
+
+.task-icon {
+  display: flex;
+  gap: 0.675rem;
+}
+
+.date {
+  display: flex;
+  gap: 0.675rem;
+}
+
+hr {
+  display: block;
+  height: 2px;
+  border: 0;
+  border-top: 2px solid var(--clr-grey);
+  margin: 1em 0;
+  padding: 0;
+}
+/* MODAL */
+/* DISPLAY NONE */
+.add-project {
+  position: absolute;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(255,255,255,0.7);
+  color: var(--clr-dark-grey);
+  overflow: hidden;
+}
+
+h2 {
+  font-size: var(--size-600);
+}
+
+.ap-body {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  background-color: var(--clr--neutral-100);
+  border-radius: 5px;
+  box-shadow: 0.5px 0.5px 10px var(--clr-grey),
+  -1px 1px 5px var(--clr-dark-grey);
+}
+
+.ap-body > *:not(:first-child) {
+  margin: 1rem;
+}
+
+.add-project-title {
+  display: flex;
+  padding: 1rem;
+  border-radius: 3px 3px 0 0;
+  color: var(--clr--neutral-100);
+  background: linear-gradient(to right, var(--clr--accent), var(--clr--light-accent));
+  position: relative;
+}
+
+.apbody-close-btn {
+  position: absolute;
+  right: 5%;
+  top: 20%;
+  font-size: var(--fs-500);
+  cursor: pointer;
+}
+
+.apbody-close-btn:hover {
+  color: var(--clr--accent);
+}
+
+.add-project-input {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+form input, .add-project-input input {
+  font-size: var(--fs-500);
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 3px;
+  border: 1px solid var(--clr-grey);
+  outline: none;
+}
+
+form input:focus, .add-project-input input:focus {
+  border: 1px solid var(--clr--accent);
+}
+
+.icons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+
+.icon {
+  border: 1px solid var(--clr-grey);
+  padding: 0.5rem;
+  width: 1.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon:hover .fa-solid, .icon:focus,
+.icon-selected .fa-solid {
+  color: var(--clr--accent);
+}
+
+.icon:hover, .icon:focus,
+.icon-selected {
+  border: 1px solid var(--clr--accent);
+  cursor: pointer;
+}
+
+.icon i {
+  pointer-events: none;
+}
+.add-project-btns {
+  display: flex;
+  justify-content: end;
+  gap: 0.5rem;
+}
+
+.cancel-btn {
+  background-color: var(--clr--neutral-100);
+  border: 1px solid var(--clr-grey);
+  color: var(--clr-dark-grey);
+}
+
+.cancel-btn, .add-btn {
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+
+.add-btn {
+  border: 1px solid var(--clr--light-accent);
+  background-color: var(--clr--light-accent);
+  color: var(--clr--neutral-100);
+}
+
+.cancel-btn:hover {
+  color: var(--clr--accent);
+  border: 1px solid var(--clr--accent);
+}
+
+.add-btn:hover {
+  background-color: var(--clr--accent);
+}
+
+.task-header-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.fa-circle-plus, .fa-trash-can, .fa-pen-to-square, .fa-circle-info {
+  cursor: pointer;
+}
+
+/* TASK CONTAINER */
+.add-task-container {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--clr-grey); 
+}
+
+.add-task-body {
+  width: 430px;
+  background-color: var(--clr--neutral-100);
+  box-shadow: 0.5px 0.5px 3px var(--clr-dark-grey);
+  color: var(--clr-dark-grey);
+  border-radius: 3px;
+}
+
+.add-task-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+input {
+  color: var(--clr-dark-grey);
+}
+
+select {
+  padding: 0.6rem;
+  background-color: var(--clr--netural-100);
+}
+
+select:focus {
+  border: 1px solid var(--clr--accent);
+}
+
+.project-selected {
+  color: var(--clr--netural-900);
+  background-color: var(--clr--accent);
+}
+
+.icon-editable:hover, .fa-pen-to-square:hover, .fa-trash-can:hover, .fa-circle-info:hover {
+  transform: scale(1.2);
+}
+
+/* Delete Modal */
+
+.delete-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--clr-grey); 
+}
+
+.delete-modal-body {
+  background-color: var(--clr--netural-900);
+  width: 25rem;
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px var(--clr-dark-grey);
+}
+
+.dm-header-container {
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(to right, var(--clr-dark-red), var(--clr-red));
+  color: var(--clr--netural-900);
+  padding:1rem;
+  border-radius: 3px 3px 0 0;
+}
+
+.dm-content {
+  color: var(--clr-dark-grey);
+  padding: 1rem;
+}
+
+.dm-content > *:not(:first-child) {
+  margin-top: 1rem;
+}
+
+.dm-btns {
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+}
+
+.delete-btn {
+  background-color: var(--clr-red);
+  border: none;
+  color: var(--clr--netural-900);
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+.delete-btn:hover {
+  background-color: var(--clr-dark-red);
+}
+.dm-close-btn {
+  cursor: pointer;
+}
+
+.check {
+  display: none;
+}
+.dm-label {
+  font-weight: bold;
+}
