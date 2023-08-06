@@ -503,7 +503,7 @@ form input:focus, .add-project-input input:focus {
 }
 
 /* TASK CONTAINER */
-.add-task-container {
+.add-task-container, .info-modal {
   display: none;
   justify-content: center;
   align-items: center;
@@ -512,10 +512,17 @@ form input:focus, .add-project-input input:focus {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--clr-grey); 
+  background-color: var(--clr-grey);
+  padding: 5rem 0; 
 }
 
-.add-task-body {
+.im-desc-content {
+  height: 5rem;
+  padding: 0.5rem;
+  border: none;
+  overflow: scroll;
+}
+.add-task-body, .info-modal-body {
   width: 430px;
   background-color: var(--clr--neutral-100);
   box-shadow: 0.5px 0.5px 3px var(--clr-dark-grey);
@@ -528,13 +535,22 @@ form input:focus, .add-project-input input:focus {
   flex-direction: column;
 }
 
-.task-form {
+.task-form, .info-modal-content {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
 }
 
+.im-container {
+  display: grid;
+  grid-template-columns: 25% 70%;
+  gap: 5%;
+}
+
+.im-container-title {
+  font-weight: bold;
+}
 input {
   color: var(--clr-dark-grey);
 }
