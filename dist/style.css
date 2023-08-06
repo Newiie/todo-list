@@ -53,7 +53,7 @@
   *:not(i),
   *::before:not(i),
   *::after:not(i) {
-    font-family: "Open Sans Condensed";
+    font-family: var(--ff-roboto);
     box-sizing: border-box;
   }
   
