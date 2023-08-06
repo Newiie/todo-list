@@ -24,15 +24,16 @@ const addTaskCancelBtn = document.querySelector("[data-at-cancel-btn]");
 const addTaskCloseBtn = document.querySelector("[data-at-close-btn]");
 const taskContainer = document.querySelector("[data-task-container]");
 const projectTemplate = document.getElementById("project-template");
-
+const infoModal = document.querySelector("[data-info-modal]")
 const allTasksBtn = document.querySelector("[data-all-tasks]");
 const todayTasksBtn = document.querySelector("[data-today-tasks]");
 const weeklyTasksBtn = document.querySelector("[data-weekly-tasks]");
 const importantTasksBtn = document.querySelector("[data-important-tasks]");
 const completedTasksBtn = document.querySelector("[data-completed-tasks]");
-
+const infoModalCancelBtn = document.querySelector("[ data-info-cancel-btn]")
 const menuBtn = document.querySelector("[data-menu-btn]")
 const headerDiv = document.querySelector("[data-nav-bar]")
+const imCloseBtn = document.querySelector("[data-im-close-btn]")
 const dueDateEvents = () => {
     dueDates.addEventListener('click', (e) => {
         if (e.target.tagName.toLowerCase() == "li") {
@@ -68,7 +69,13 @@ const dueDateEvents = () => {
 }
 
 const addBtns = () => {
+    infoModalCancelBtn.addEventListener('click', () => {
+        infoModal.style.display = 'none';
+    })
 
+    imCloseBtn.addEventListener('click', () => {
+        infoModal.style.display = 'none';
+    })
     menuBtn.addEventListener('click', () => {
         console.log(headerDiv)
         console.log("went in")
@@ -191,6 +198,31 @@ export const renderTask = (task) => {
     const taskInfoBtn = taskTemplate.querySelector("[data-task-info]");
     const taskElement = taskTemplate.querySelector("[data-task-body]")
 
+    taskInfoBtn.addEventListener('click', () => {
+        const infoTitle = document.querySelector("[data-info-title]")
+        const infoDesc = document.querySelector("[data-info-desc]");
+        const infoDate = document.querySelector("[data-info-date]")
+        const infoPrio = document.querySelector("[data-info-prio]")
+        const infoProject = document.querySelector("[data-info-project]")
+
+        infoTitle.textContent = '';
+        infoDesc.textContent = '';
+        infoDate.textContent = '';
+        infoPrio.textContent = '';
+        infoProject.textContent = '';
+
+        infoTitle.textContent = task.title
+        infoDesc.textContent = task.description
+        infoDate.textContent = task.date
+        infoPrio.textContent = task.priority;
+
+        findProject(taskInfoBtn.closest("[data-task-body]").getAttribute("id"));
+        infoProject.textContent = projects.find(project => project.id == selectedProject.getAttribute("id")).name;
+        console.log(selectedProject);
+
+        infoModal.style.display = 'flex';
+    })
+
     taskEditBtn.addEventListener('click', () => {
     
         const taskTitle = addTaskContainer.querySelector("[data-project-title]")
@@ -243,29 +275,6 @@ export const renderProject = (projects) => {
         const projectElement = document.importNode(projectTemplate.content, true);
         const iconId = project.icon;
         chosenIcon(iconId, iconElement);
-        // switch (iconId) {
-        //     case "fa-book":
-        //         iconElement.classList.add("fa-solid", "fa-book");
-        //         break;
-        //     case "fa-hammer":
-        //         iconElement.classList.add("fa-solid", "fa-hammer");
-        //         break;
-        //     case "fa-volleyball":
-        //         iconElement.classList.add("fa-solid", "fa-volleyball");
-        //         break;
-        //     case "fa-sack-dollar":
-        //         iconElement.classList.add("fa-solid", "fa-sack-dollar");
-        //         break;
-        //     case "fa-pizza-slice":
-        //         iconElement.classList.add("fa-solid", "fa-pizza-slice");
-        //         break;
-        //     case "fa-school":
-        //         iconElement.classList.add("fa-solid", "fa-school");
-        //         break;
-        //     case "fa-gift":
-        //         iconElement.classList.add("fa-solid", "fa-gift");
-        //         break;
-        // }
         const projectContent = projectElement.querySelector(".project-content");
         const projectLabel = projectElement.querySelector(".project-label");
         const iconEditable = projectElement.querySelector("[data-project-edit]");
@@ -299,6 +308,7 @@ export const renderProject = (projects) => {
             chosenIcon(iconId, iconElement)
             todoHeaderElement.textContent = project.name;
             clearElement(todoHeader)
+            todoHeader.textContent = '';
             todoHeader.append(iconElement);
             todoHeader.append(todoHeaderElement)
         })
