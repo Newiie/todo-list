@@ -1,11 +1,9 @@
-import { clearElement, createProject, deleteProject, selectProject, addTask, projects, selectedProject, infoEdit, selectedTask, editTask, deleteTask} from "./CRUD";
-import { AllTasks, TodayTask, TodayTasks, WeeklyTasks, completedTasks, importantTasks } from "./IMPORTANCE";
+import { clearElement, deleteProject, addTask, projects, selectedProject, infoEdit, selectedTask, editTask, deleteTask} from "./CRUD";
+import { AllTasks, TodayTasks, WeeklyTasks, completedTasks, importantTasks } from "./IMPORTANCE";
 import { chosenIcon, clearInput, clearSelectedIcon, findProject, populateEditTaskContainer, save, saveAndRenderTask } from "./util";
 
 const iconsContainer = document.querySelector("[data-icons-container]");
 const addProjectBtn = document.querySelector("[data-ap-add-btn]");
-const projectTitle = document.querySelector("[data-add-project-text-title]");
-// const projectTemplate = document.getElementById("project-template");
 const projectContainer = document.querySelector("[data-project-container]");
 const todoHeader = document.querySelector("[data-todo-header]");
 const dueDates = document.querySelector("[data-due-dates]");
@@ -34,6 +32,7 @@ const infoModalCancelBtn = document.querySelector("[ data-info-cancel-btn]")
 const menuBtn = document.querySelector("[data-menu-btn]")
 const headerDiv = document.querySelector("[data-nav-bar]")
 const imCloseBtn = document.querySelector("[data-im-close-btn]")
+
 const dueDateEvents = () => {
     dueDates.addEventListener('click', (e) => {
         if (e.target.tagName.toLowerCase() == "li") {

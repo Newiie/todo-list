@@ -2,14 +2,10 @@ import { renderProject, renderTask } from "./DOM";
 import { LOCAL_STORAGE_PROJECTS_KEY, LOCAL_STORAGE_SELECTED_PROJECT_KEY, clearSelectedIcon, editProject, saveAndRenderProject, saveAndRenderTask } from "./util";
 
 const addProjectBtn = document.querySelector("[data-ap-add-btn]");
-const projectContainer = document.querySelector("[data-project-container]");
 const addProjectContainer = document.querySelector("[data-add-project-container]");
-// const projectTemplate = document.getElementById("project-template");
 const iconsContainer = document.querySelector("[data-icons-container]");
 const projectTitle = document.querySelector("[data-add-project-text-title]");
 const deleteModal = document.querySelector("[data-delete-modal]");
-// const dmCloseBtn = document.querySelector("[data-dm-close-button]");
-const taskContainer = document.querySelector("[data-task-container]");
 
 export let selectedProject = JSON.parse(localStorage.getItem(LOCAL_STORAGE_SELECTED_PROJECT_KEY)) || "";
 let selectedProjectArray = "";
