@@ -1,6 +1,6 @@
 import { clearElement, createProject, deleteProject, selectProject, addTask, projects, selectedProject, infoEdit, selectedTask, editTask, deleteTask} from "./CRUD";
 import { AllTasks, TodayTask, TodayTasks, WeeklyTasks, completedTasks, importantTasks } from "./IMPORTANCE";
-import { clearInput, clearSelectedIcon, findProject, populateEditTaskContainer, save, saveAndRenderTask } from "./util";
+import { chosenIcon, clearInput, clearSelectedIcon, findProject, populateEditTaskContainer, save, saveAndRenderTask } from "./util";
 
 const iconsContainer = document.querySelector("[data-icons-container]");
 const addProjectBtn = document.querySelector("[data-ap-add-btn]");
@@ -242,29 +242,30 @@ export const renderProject = (projects) => {
         const iconElement = document.createElement("i");
         const projectElement = document.importNode(projectTemplate.content, true);
         const iconId = project.icon;
-        switch (iconId) {
-            case "fa-book":
-                iconElement.classList.add("fa-solid", "fa-book");
-                break;
-            case "fa-hammer":
-                iconElement.classList.add("fa-solid", "fa-hammer");
-                break;
-            case "fa-volleyball":
-                iconElement.classList.add("fa-solid", "fa-volleyball");
-                break;
-            case "fa-sack-dollar":
-                iconElement.classList.add("fa-solid", "fa-sack-dollar");
-                break;
-            case "fa-pizza-slice":
-                iconElement.classList.add("fa-solid", "fa-pizza-slice");
-                break;
-            case "fa-school":
-                iconElement.classList.add("fa-solid", "fa-school");
-                break;
-            case "fa-gift":
-                iconElement.classList.add("fa-solid", "fa-gift");
-                break;
-        }
+        chosenIcon(iconId, iconElement);
+        // switch (iconId) {
+        //     case "fa-book":
+        //         iconElement.classList.add("fa-solid", "fa-book");
+        //         break;
+        //     case "fa-hammer":
+        //         iconElement.classList.add("fa-solid", "fa-hammer");
+        //         break;
+        //     case "fa-volleyball":
+        //         iconElement.classList.add("fa-solid", "fa-volleyball");
+        //         break;
+        //     case "fa-sack-dollar":
+        //         iconElement.classList.add("fa-solid", "fa-sack-dollar");
+        //         break;
+        //     case "fa-pizza-slice":
+        //         iconElement.classList.add("fa-solid", "fa-pizza-slice");
+        //         break;
+        //     case "fa-school":
+        //         iconElement.classList.add("fa-solid", "fa-school");
+        //         break;
+        //     case "fa-gift":
+        //         iconElement.classList.add("fa-solid", "fa-gift");
+        //         break;
+        // }
         const projectContent = projectElement.querySelector(".project-content");
         const projectLabel = projectElement.querySelector(".project-label");
         const iconEditable = projectElement.querySelector("[data-project-edit]");
@@ -291,8 +292,15 @@ export const renderProject = (projects) => {
         })
    
         projectE.addEventListener('click', () => {
+            const iconId = project.icon;
+            const iconElement = document.createElement("i");
+            const todoHeaderElement = document.createElement("p")
             addTask.style.display = 'flex';
-            
+            chosenIcon(iconId, iconElement)
+            todoHeaderElement.textContent = project.name;
+            clearElement(todoHeader)
+            todoHeader.append(iconElement);
+            todoHeader.append(todoHeaderElement)
         })
 
         projectE.setAttribute("id", project.id);

@@ -78,3 +78,29 @@ export const findProject = (taskId) => {
     const project = projects.find(project => project.tasks.find(task => task.id == taskId))
     selectProject(project);
 }
+
+export function chosenIcon(iconId, iconElement) {
+    switch (iconId) {
+        case "fa-book":
+            iconElement.classList.add("fa-solid", "fa-book");
+            break;
+        case "fa-hammer":
+            iconElement.classList.add("fa-solid", "fa-hammer");
+            break;
+        case "fa-volleyball":
+            iconElement.classList.add("fa-solid", "fa-volleyball");
+            break;
+        case "fa-sack-dollar":
+            iconElement.classList.add("fa-solid", "fa-sack-dollar");
+            break;
+        case "fa-pizza-slice":
+            iconElement.classList.add("fa-solid", "fa-pizza-slice");
+            break;
+        case "fa-school":
+            iconElement.classList.add("fa-solid", "fa-school");
+            break;
+        case "fa-gift":
+            iconElement.classList.add("fa-solid", "fa-gift");
+            break;
+    }
+}
