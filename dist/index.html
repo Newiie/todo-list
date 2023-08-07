@@ -106,7 +106,7 @@
                         <div class="icon" id="fa-gift"><i class="fa-solid fa-gift"></i></div> 
                     </div>
                 </div>
-                <hr>
+                <hr class="hr-90">
                 <div class="add-project-btns">
                     <button class="cancel-btn" data-ap-cancel-btn>Cancel</button>
                     <button class="add-btn" data-ap-add-btn>Add</button>
@@ -114,9 +114,9 @@
             </div>
         </div>
         <div class="add-task-container modal" data-add-task-container>
-            <div class="add-task-body">
+            <div class="add-task-body modal-body">
                 <div class="add-project-title">
-                    <h2 data-project-title>Add Task</h2>
+                    <h2 class="modal-title" data-project-title>Add Task</h2>
                     <i class="fa-solid fa-xmark apbody-close-btn" data-at-close-btn></i>
                 </div>
                 <form class="task-form" action="" data-task-form>
@@ -128,7 +128,8 @@
                     <label for="task-date">Due Date</label>
                     <input type="date" name="task-date" id="task-date" data-task-date>
                     <label for="task-priority">Priority</label>
-                    <select name="" id="" data-task-priority>
+                    <select name="" id="prioritySelect" data-task-priority>
+                        <option selected disabled>Choose Priority</option>
                         <option value="notimportant">Not Important At All</option>
                         <option value="abitimportant">A bit Important</option>
                         <option value="important">Very Important</option>
@@ -161,35 +162,40 @@
         </div>
 
         <div class="info-modal modal" data-info-modal>
-            <div class="info-modal-body">
+            <div class="info-modal-body modal-body">
                 <div class="add-project-title">
-                    <h2 data-project-title>Task Info</h2>
+                    <h2 class="modal-title"data-project-title>Task Info</h2>
                     <i class="fa-solid fa-xmark apbody-close-btn" data-im-close-btn></i>
                 </div>
                 <div class="info-modal-content">
                     <div class="im-container">
                         <h5 class="im-container-title">Title: </h5>
                         <p class="im-container-content" data-info-title></p>
+                        
                     </div>
                     <hr>
-                    <div class="im-container">
+                    <div class="im-container desc-container">
                         <h5 class="im-container-title" >Description: </h5>
-                        <textarea row="4" col="50" class="im-container-content im-desc-content" data-info-desc></textarea >
+                        <textarea disabled row="4" col="50" class="im-container-content im-desc-content" data-info-desc></textarea >
+                            
                     </div>
                     <hr>
                     <div class="im-container">
                         <h5 class="im-container-title" >Due Date:</h5>
                         <p class="im-container-content" data-info-date></p>
+                        
                     </div>
                     <hr>
                     <div class="im-container">
                         <h5 class="im-container-title">Priority: </h5>
                         <p class="im-container-content"  data-info-prio></p>
+                        
                     </div>
                     <hr>
                     <div class="im-container">
                         <h5 class="im-container-title">Project Title: </h5>
                         <p class="im-container-content" data-info-project></p>
+                        
                     </div>
                     <hr>
                     <div class="add-project-btns">
@@ -216,7 +222,7 @@
     <template id="task-template">
         <div class="task" data-task-body>
             <div class="task-content">
-                <input type="checkbox" name="" id="" data-task-checkbox>
+                <input class="in-checkbox" type="checkbox" name="" id="" data-task-checkbox>
                 <p data-task-description></p>
             </div>
             

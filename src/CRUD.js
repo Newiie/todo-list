@@ -104,13 +104,13 @@ export const editTask = () => {
     const projectID =  selectedProject.getAttribute("id");
 
     const taskItem = projects.find(project => project.id == projectID).tasks.find(task => task.id == taskId);
- 
+    
     const taskForm = document.querySelector("[data-task-form");
     const taskTitle = taskForm.querySelector("[data-task-title]")
     const taskDescription = taskForm.querySelector("[data-task-description]");
     const taskDate = taskForm.querySelector("[data-task-date]");
     const taskPriority = taskForm.querySelector("[data-task-priority]");
-
+    taskDescription.textContent = '';
     taskItem.title = taskTitle.value;
     taskItem.description = taskDescription.value;
     taskItem.date = taskDate.value;

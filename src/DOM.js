@@ -33,6 +33,7 @@ const menuBtn = document.querySelector("[data-menu-btn]")
 const headerDiv = document.querySelector("[data-nav-bar]")
 const imCloseBtn = document.querySelector("[data-im-close-btn]")
 
+
 const dueDateEvents = () => {
     dueDates.addEventListener('click', (e) => {
         if (e.target.tagName.toLowerCase() == "li") {
@@ -68,6 +69,16 @@ const dueDateEvents = () => {
 }
 
 const addBtns = () => {
+    const prioritySelect = document.getElementById("prioritySelect");
+
+    prioritySelect.addEventListener("change", function() {
+        const selectedOption = prioritySelect.options[prioritySelect.selectedIndex];
+
+        if (selectedOption.value !== "choosepriority") {
+            prioritySelect.options[0].disabled = true;
+        }
+    });
+
     infoModalCancelBtn.addEventListener('click', () => {
         infoModal.style.display = 'none';
     })
@@ -123,9 +134,11 @@ const addBtns = () => {
     }))
 
     addTaskContainerBtn.addEventListener('click', () => {
+        // const taskDescription = document.querySelector("[data-task-description]");
+        console.log("went in")
         clearInput(addTaskContainer);
         addTaskContainer.style.display = 'flex';
-        
+        // taskDescription.textContent = '';
         const taskTitle = addTaskContainer.querySelector("[data-project-title]")
         const taskEditBtn = addTaskContainer.querySelector("[data-add-task-btn]");
 
@@ -189,7 +202,6 @@ const iconsEvent = () => {
 export const renderTask = (task) => {
     const taskTemplateContainer = document.querySelector("#task-template");
     const taskTemplate = document.importNode(taskTemplateContainer.content, true);
-    
     const taskDescription = taskTemplate.querySelector("[data-task-description]");
     const taskCheckBox = taskTemplate.querySelector("[data-task-checkbox]");
     const taskEditBtn = taskTemplate.querySelector("[data-task-edit]");
@@ -257,12 +269,15 @@ export const renderTask = (task) => {
         const taskId = selectedTask.getAttribute("id");
         projects.find(project => project.tasks.find(task => {
             task.id == taskId ? task.complete = taskCheckBox.checked : '';
+            taskDescription.classList.toggle("line-through")
         }))
+        
         save();
     })
 
     taskElement.setAttribute("id", task.id);
     taskCheckBox.checked = task.complete;
+    task.complete ? taskDescription.classList.add("line-through") : ''
     taskDescription.textContent = task.title;
     taskContainer.append(taskTemplate); 
 }

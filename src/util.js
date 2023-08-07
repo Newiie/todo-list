@@ -33,6 +33,8 @@ export const clearSelectedIcon = () => {
 export const clearInput = (container) => {
     const inputs = container.querySelectorAll("input");
     inputs.forEach(input => input.value = "");
+    const textContainer = container.querySelector("textarea")
+    textContainer.value = '';
 }
 
 export const populateEditTaskContainer = () => {

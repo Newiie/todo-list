@@ -53,7 +53,7 @@
   *:not(i),
   *::before:not(i),
   *::after:not(i) {
-    font-family: "Open Sans Condensed";
+    font-family: var(--ff-roboto);
     box-sizing: border-box;
   }
   
@@ -161,17 +161,23 @@
   "nav-bar todo-container todo-container todo-container "
   "nav-bar todo-container todo-container todo-container "
   ;
-  grid-template-rows: calc(2rem + 1.5625rem) repeat(3, 1fr);
+  grid-template-rows: calc(2rem + 1.5625rem) repeat(1, 1fr);
   grid-template-columns: 300px repeat(3,1fr);
   width: 100%;
   height: 100vh;
   position: relative;
 }
 
+.hr-90 {
+  width: 90%;
+}
 .todo-container, .content {
   z-index: 0;
 }
 
+.modal hr {
+  margin: 0;
+}
 .menu {
   width: 1px;
   aspect-ratio: 1;
@@ -244,7 +250,6 @@
   padding: 2.5rem 1.5rem;
   color: var(--clr-dark-grey);
   height: max(calc(100vh - 8.5625rem), 100%);
-  overflow: scroll;
 }
 
 .todo-container {
@@ -413,7 +418,9 @@ h2 {
   flex-direction: column;
 }
 
-
+.in-checkbox {
+  border-radius: 50%;
+}
 
 form input, .add-project-input input {
   font-size: var(--fs-500);
@@ -437,7 +444,7 @@ form input:focus, .add-project-input input:focus {
 
 .icon {
   border: 1px solid var(--clr-grey);
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   width: 1.5rem;
   border-radius: 0.5rem;
   display: flex;
@@ -551,6 +558,53 @@ form input:focus, .add-project-input input:focus {
 .im-container-title {
   font-weight: bold;
 }
+
+.line-through {
+  text-decoration: line-through;
+}
+
+hr {
+  width: 100%;
+}
+
+@media (max-width: 50em) {
+  .im-container {
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(2, 2rem);
+  }
+
+  .desc-container {
+    display: block;
+  }
+  .im-desc-content {
+    width: 100%;
+  }
+  .desc-container > * {
+    margin: 0.5rem 0;
+  }
+  .im-desc-content {
+    padding: 0;
+    display: block;
+  }
+
+  hr {
+    margin: 0.5rem 0;
+  }
+  .modal-title {
+    font-size: var(--fs-550);
+  }
+
+  .modal-body {
+    width: 80%;
+    margin: auto;
+  }
+
+  .info-modal-content {
+    gap: 0;
+  }
+}
+
+
 input {
   color: var(--clr-dark-grey);
 }
