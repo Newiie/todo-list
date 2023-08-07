@@ -559,9 +559,6 @@ form input:focus, .add-project-input input:focus {
   font-weight: bold;
 }
 
-.line-through {
-  text-decoration: line-through;
-}
 
 hr {
   width: 100%;
