@@ -23,3 +23,6 @@
   * You can see what tasks are important and already completed.
 
 The live preview is [here.](https://newiie.github.io/todo-list/)
+
+Credits for [mooniDev](https://github.com/mooniiDev) , I used his design.  
+His [todolist](https://github.com/mooniiDev/todo-list)   Github [Live Project](https://mooniidev.github.io/todo-list/)  
