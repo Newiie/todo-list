@@ -1,5 +1,5 @@
-import  { clearElement } from "./CRUD"
-import { projects} from "./constants";
+import  { clearElement } from "./util"
+import { projects} from "./utils/constants";
 import { renderTask } from "./DOM"
 import {  format, isThisWeek, parse} from 'date-fns'
 
@@ -8,7 +8,12 @@ const taskContainer = document.querySelector("[data-task-container]");
 // Selects all tasks
 export const allTasks = () => {
     clearElement(taskContainer);
-    projects.forEach(project => project.tasks.forEach(task => renderTask(task)))
+    console.log(projects);
+    projects.forEach(project => {
+        if (project.tasks.length > 0) {
+            project.tasks.forEach(task => renderTask(task))
+        }
+    })
 }
 
 // Filters all tasks that are due today

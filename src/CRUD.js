@@ -1,5 +1,10 @@
 import { clearSelectedIcon, editProject, saveAndRenderProject, saveAndRenderTask } from "./util";
-import { selectedProject, selectedTask, projects, removeProject } from "./constants";
+import { selectedProject, selectedTask, projects, removeProject } from "./utils/constants";
+
+import { createTask } from "./components/createTask";
+import Project from "./models/Project";
+import TaskForm from "./components/TaskForm";
+
 // DOM Elements variables
 const addProjectBtn = document.querySelector("[data-ap-add-btn]");
 const addProjectContainer = document.querySelector("[data-add-project-container]");
@@ -15,24 +20,7 @@ export const selectProject = (selected) => {
     selectedProject = document.getElementById(selected.id);
 }
 
-// ---------- CRUD FOR PROJECT COMPONENTS ---------------
 
-// returns a new project object
-export function createProject(name, icon) {
-    return {
-        id: Date.now().toString(),
-        name: name,
-        icon: icon,
-        tasks: []
-    }
-}
-
-// loops through the elements and removes the first child until there are no children left
-export const clearElement = (elements) => {
-    while (elements.firstElementChild) {
-        elements.removeChild(elements.firstElementChild);
-    }
-}
 
 // calls an event listener to the add project button
 export const addProject = () => {
@@ -41,8 +29,9 @@ export const addProject = () => {
         if (!selectedIcon || projectTitle.value === '') return;
         const iconID = selectedIcon.getAttribute("id");
         if (addProjectBtn.textContent == "Add") {
-            projects.push(createProject(projectTitle.value, iconID));
+            projects.push(Project(projectTitle.value, iconID));
             saveAndRenderProject(projects);
+
             projectTitle.value = '';
             selectedIcon.classList.remove("icon-selected");
             addProjectContainer.style.display = 'none';
@@ -57,6 +46,7 @@ export const addProject = () => {
 export const deleteProject = () => {
     removeProject(selectedProject.id);
     saveAndRenderProject(projects);
+    saveAndRenderTask();
 }
 
 export function infoEdit(id) {
@@ -64,26 +54,6 @@ export function infoEdit(id) {
     projectTitle.value = selectedProjectArray.name;
     clearSelectedIcon();
     iconsContainer.querySelector(`#${selectedProjectArray.icon}`).classList.add("icon-selected");
-}
-
-
-// ---------- CRUD FOR TASK ---------------
-
-export function createTask() {
-    const taskForm = document.querySelector("[data-task-form");
-    const taskTitle = taskForm.querySelector("[data-task-title]")
-    const taskDescription = taskForm.querySelector("[data-task-description]");
-    const taskDate = taskForm.querySelector("[data-task-date]");
-    const taskPriority = taskForm.querySelector("[data-task-priority]");
-
-    return {
-        id: Date.now().toString(),
-        title: taskTitle.value,
-        completed: false,
-        description: taskDescription.value, 
-        date: taskDate.value,
-        priority: taskPriority.value
-    };
 }
 
 export const addTask = () => {
@@ -97,20 +67,15 @@ export const editTask = () => {
     const taskId = selectedTask.getAttribute("id");
     const projectID =  selectedProject.getAttribute("id");
 
-    // Finds the task that belongs to the project
     const taskItem = projects.find(project => project.id == projectID).tasks.find(task => task.id == taskId);
-    
-    const taskForm = document.querySelector("[data-task-form");
-    const taskTitle = taskForm.querySelector("[data-task-title]")
-    const taskDescription = taskForm.querySelector("[data-task-description]");
-    const taskDate = taskForm.querySelector("[data-task-date]");
-    const taskPriority = taskForm.querySelector("[data-task-priority]");
+   
+    const taskForm = TaskForm();
+    taskForm.taskDescription.textContent = '';
 
-    taskDescription.textContent = '';
-    taskItem.title = taskTitle.value;
-    taskItem.description = taskDescription.value;
-    taskItem.date = taskDate.value;
-    taskItem.priority = taskPriority.value;
+    taskItem.title = taskForm.taskTitle.value;
+    taskItem.description = taskForm.taskDescription.value;
+    taskItem.date = taskForm.taskDate.value;
+    taskItem.priority = taskForm.taskPriority.value;
 }
 
 export const deleteTask = () => {
