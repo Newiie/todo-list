@@ -115,7 +115,7 @@ export const editTask = () => {
     taskItem.description = taskDescription.value;
     taskItem.date = taskDate.value;
     taskItem.priority = taskPriority.value;
-    console.log(taskItem);
+    // console.log(taskItem);
 }
 
 export const selectProject = (selected) => {

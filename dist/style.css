@@ -2,11 +2,12 @@
     --clr--accent: #00b3bb;
     --clr--light-accent: #00e6aa;
     --clr--neutral-100: #fff;
-    --clr--netural-900: #F7F7F7;
+    --clr--netural-900: #F0f0f0;
     --clr-dark-grey: #757575;
     --clr-grey: rgba(192, 192, 192, 0.7);
     --clr-dark-red: #C46161;
     --clr-red: #E67B7B;
+    --bg-modal: rgba(255,255,255,0.7);
 
     --ff-lato: 'Lato', sans-serif;
     --ff-roboto: 'Roboto', sans-serif;
@@ -151,7 +152,6 @@
     font-size: var(--fs-900);
 }
 
-
 /* var */
 #container {
   display: grid;
@@ -164,7 +164,8 @@
   grid-template-rows: calc(2rem + 1.5625rem) repeat(1, 1fr);
   grid-template-columns: 300px repeat(3,1fr);
   width: 100%;
-  height: 100vh;
+  height: max-content;
+  min-height: 100vh;
   position: relative;
 }
 
@@ -173,6 +174,16 @@
 }
 .todo-container, .content {
   z-index: 0;
+}
+
+.modal {
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .modal hr {
@@ -242,14 +253,15 @@
 }
 
 .todo-header {
-  text-align: center  ;
+  text-align: center;
 }
+
 .nav-bar {
   grid-area: nav-bar;
   background-color: var(--clr--netural-900);
   padding: 2.5rem 1.5rem;
   color: var(--clr-dark-grey);
-  height: max(calc(100vh - 8.5625rem), 100%);
+  min-height: calc(100vh - 8.5625rem);
 }
 
 .todo-container {
@@ -264,9 +276,11 @@
   background-color: var(--clr--neutral-100);
   padding: 0.775rem 1rem;
   border-radius: 0.5rem;
+  outline: 1px solid var(--clr-grey);
   /* color: var(--clr--neutral-100); */
   list-style: none;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .date:hover,
@@ -331,8 +345,34 @@ hr {
 
 .task {
   display: flex;
+  position: relative;
   justify-content: space-between;
   padding: 1rem;
+  transition: 0.3s;
+  border-radius: 4px;
+}
+
+.task:hover {
+  cursor: pointer;
+}
+
+.task::before {
+  content: '';
+  height: 0;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  position: absolute;
+  background-color: white;
+  background-color: #DDD;
+  border-radius: 4px;
+  transform: rotate(180deg);
+}
+
+.task:hover::before {
+  transition: 350ms;
+  height: 100%;
 }
 
 .task-content {
@@ -361,15 +401,8 @@ hr {
 /* MODAL */
 /* DISPLAY NONE */
 .add-project {
-  position: absolute;
   display: none;
-  align-items: center;
-  justify-content: center;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(255,255,255,0.7);
+  background-color: var(--bg-modal);
   color: var(--clr-dark-grey);
   overflow: hidden;
 }
@@ -381,7 +414,6 @@ h2 {
 .ap-body {
   display: flex;
   flex-direction: column;
-  width: 350px;
   background-color: var(--clr--neutral-100);
   border-radius: 5px;
   box-shadow: 0.5px 0.5px 10px var(--clr-grey),
@@ -407,6 +439,7 @@ h2 {
   top: 20%;
   font-size: var(--fs-500);
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .apbody-close-btn:hover {
@@ -441,10 +474,18 @@ form input:focus, .add-project-input input:focus {
   margin-top: 0.75rem;
 }
 
+.ic-btn {
+  outline: none;
+  background: transparent;
+  border: none;
+  color: var(--clr-dark-grey);
+  cursor: pointer;
+}
 
 .icon {
   border: 1px solid var(--clr-grey);
-  padding: 0.5rem 1rem;
+  color: var(--clr-dark-grey);
+  padding: 0.5rem;
   width: 1.5rem;
   border-radius: 0.5rem;
   display: flex;
@@ -482,12 +523,14 @@ form input:focus, .add-project-input input:focus {
   padding: 0.65rem 0.85rem;
   border-radius: 0.3rem;
   cursor: pointer;
+  transition: 0.5s;
 }
 
 .add-btn {
   border: 1px solid var(--clr--light-accent);
   background-color: var(--clr--light-accent);
   color: var(--clr--neutral-100);
+  transition: 0.5s;
 }
 
 .cancel-btn:hover {
@@ -512,15 +555,7 @@ form input:focus, .add-project-input input:focus {
 /* TASK CONTAINER */
 .add-task-container, .info-modal {
   display: none;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--clr-grey);
-  padding: 5rem 0; 
+  background-color: var(--bg-modal);
 }
 
 .im-desc-content {
@@ -530,7 +565,6 @@ form input:focus, .add-project-input input:focus {
   overflow: scroll;
 }
 .add-task-body, .info-modal-body {
-  width: 430px;
   background-color: var(--clr--neutral-100);
   box-shadow: 0.5px 0.5px 3px var(--clr-dark-grey);
   color: var(--clr-dark-grey);
@@ -623,22 +657,20 @@ select:focus {
   background-color: var(--clr--accent);
 }
 
+.project-selected .icon-editable {
+  color: var(--clr--netural-900);
+}
+
 .icon-editable:hover, .fa-pen-to-square:hover, .fa-trash-can:hover, .fa-circle-info:hover {
   transform: scale(1.2);
+  transition: .1s;
 }
 
 /* Delete Modal */
 
 .delete-modal {
-  position: absolute;
-  top: 0;
-  left: 0;
   display: none;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  background-color: var(--clr-grey); 
+  background-color: var(--bg-modal);
 }
 
 .delete-modal-body {
@@ -682,7 +714,9 @@ select:focus {
 }
 .delete-btn:hover {
   background-color: var(--clr-dark-red);
+  transition: 500ms ease-in-out;
 }
+
 .dm-close-btn {
   cursor: pointer;
 }
@@ -692,10 +726,5 @@ select:focus {
 }
 .dm-label {
   font-weight: bold;
-}
-
-.task:hover {
-  cursor: pointer;
-   background-color: var(--clr-grey);
 }
 

@@ -88,7 +88,6 @@ const addBtns = () => {
     })
     menuBtn.addEventListener('click', () => {
         console.log(headerDiv)
-        console.log("went in")
         headerDiv.classList.toggle("active");
     })
 
@@ -135,7 +134,6 @@ const addBtns = () => {
 
     addTaskContainerBtn.addEventListener('click', () => {
         // const taskDescription = document.querySelector("[data-task-description]");
-        console.log("went in")
         clearInput(addTaskContainer);
         addTaskContainer.style.display = 'flex';
         // taskDescription.textContent = '';
@@ -264,7 +262,6 @@ export const renderTask = (task) => {
     })
 
     taskCheckBox.addEventListener('click', () => {
-        console.log('went in')
         selectedTask = taskCheckBox.closest("[data-task-body]");
         const taskId = selectedTask.getAttribute("id");
         projects.find(project => project.tasks.find(task => {
