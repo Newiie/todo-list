@@ -1,6 +1,5 @@
-import { renderProject, renderTask } from "./DOM";
 import { clearSelectedIcon, editProject, saveAndRenderProject, saveAndRenderTask } from "./util";
-import { LOCAL_STORAGE_PROJECTS_KEY, LOCAL_STORAGE_SELECTED_PROJECT_KEY } from "./config";
+import { selectedProject, selectedTask, projects, removeProject } from "./constants";
 // DOM Elements variables
 const addProjectBtn = document.querySelector("[data-ap-add-btn]");
 const addProjectContainer = document.querySelector("[data-add-project-container]");
@@ -8,40 +7,8 @@ const iconsContainer = document.querySelector("[data-icons-container]");
 const projectTitle = document.querySelector("[data-add-project-text-title]");
 const deleteModal = document.querySelector("[data-delete-modal]");
 
-// Global Variables 
+// helper variable
 let selectedProjectArray = "";
-export let selectedTask = "";
-export let selectedProject = null;
-
-export function setSelectedProject(project) {
-    selectedProject = project;
-}
-
-export function setSelectedTask(task) {
-    selectedTask = task;
-}
-// Selects a project from the localstorage that was previously selected
-selectedProject = JSON.parse(localStorage.getItem(LOCAL_STORAGE_SELECTED_PROJECT_KEY)) || "";
-
-// retrieves projects from localstorage and creates a default project if there are none
-export let projects = JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROJECTS_KEY)) || [
-    {
-        id: "123123123",
-        name: "asd",
-        icon: "fa-book",
-        tasks: [
-            {
-                id: '123123',
-                title: "Sample Project",
-                complete: true,
-                description: "This is a sample description.", 
-                date: "2022-07-07", 
-                priority: "important"
-            }
-        ]
-    }
-];
-
 
 // Selects a project from the localstorage that was previously selected
 export const selectProject = (selected) => {
@@ -50,7 +17,7 @@ export const selectProject = (selected) => {
 
 // ---------- CRUD FOR PROJECT COMPONENTS ---------------
 
-// Creates a new project
+// returns a new project object
 export function createProject(name, icon) {
     return {
         id: Date.now().toString(),
@@ -60,14 +27,14 @@ export function createProject(name, icon) {
     }
 }
 
-// Clears the elements
+// loops through the elements and removes the first child until there are no children left
 export const clearElement = (elements) => {
     while (elements.firstElementChild) {
         elements.removeChild(elements.firstElementChild);
     }
 }
 
-// Adds a new project
+// calls an event listener to the add project button
 export const addProject = () => {
     addProjectBtn.addEventListener('click', () => {
         const selectedIcon = iconsContainer.querySelector(".icon-selected");
@@ -87,13 +54,13 @@ export const addProject = () => {
     })
 }
 
-// Deletes a project
+// deletes a project
 export const deleteProject = () => {
-    projects = projects.filter(project => project.id != selectedProject.id) 
+    removeProject(selectedProject.id);
     saveAndRenderProject(projects);
 }
 
-// Edits a project
+// edits a project
 export function infoEdit(id) {
     selectedProjectArray = projects.find(project => project.id == id);
     projectTitle.value = selectedProjectArray.name;

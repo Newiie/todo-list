@@ -1,4 +1,5 @@
-import { clearElement, projects, setSelectedProject, selectedProject, setSelectedTask, selectedTask } from "./CRUD";
+import { clearElement } from "./CRUD";
+import { projects, selectedProject, selectedTask, setSelectedProject } from "./constants";
 import { renderProject, renderTask } from "./DOM";
 import { LOCAL_STORAGE_PROJECTS_KEY, LOCAL_STORAGE_SELECTED_PROJECT_KEY } from "./config";
 

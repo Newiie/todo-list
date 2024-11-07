@@ -1,7 +1,7 @@
-import render, { clearElement, projects, selectedProject, selectedTask } from "./CRUD"
+import  { clearElement } from "./CRUD"
+import { projects} from "./constants";
 import { renderTask } from "./DOM"
-import { compareAsc, format, isThisWeek, parse} from 'date-fns'
-// import { projects, selectedProject, selectedTask } from "./constants";
+import {  format, isThisWeek, parse} from 'date-fns'
 
 const taskContainer = document.querySelector("[data-task-container]");
 

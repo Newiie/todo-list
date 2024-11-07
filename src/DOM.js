@@ -1,6 +1,7 @@
-import { clearElement, deleteProject, addTask, projects, setSelectedProject, selectedProject, infoEdit, setSelectedTask, selectedTask, editTask, deleteTask} from "./CRUD";
+import { clearElement, deleteProject, addTask, infoEdit, editTask, deleteTask} from "./CRUD";
 import { AllTasks, TodayTasks, WeeklyTasks, completedTasks, importantTasks } from "./NavFilters";
 import { chosenIcon, clearInput, clearSelectedIcon, findProject, populateEditTaskContainer, save, saveAndRenderTask } from "./util";
+import { selectedProject, selectedTask, projects, setSelectedProject, setSelectedTask } from "./constants";
 
 // ---------- DOM ELEMENTS FOR CONTAINERS ---------------
 const projectContainer = document.querySelector("[data-project-container]");
@@ -100,6 +101,7 @@ const buttonEvents = () => {
     imCloseBtn.addEventListener('click', () => {
         infoModal.style.display = 'none';
     })
+    
     menuBtn.addEventListener('click', () => {
         console.log(headerDiv)
         headerDiv.classList.toggle("active");
