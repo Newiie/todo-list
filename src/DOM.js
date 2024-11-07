@@ -122,6 +122,7 @@ const addBtns = () => {
     apCancelBtn.addEventListener('click', () => {
         addProjectContainer.style.display = "none";
         const pcTitle = addProjectContainer.querySelector("h2");
+        console.log(pcTitle)
         pcTitle.textContent = "Add Project";
         clearInput(addProjectContainer);
         clearSelectedIcon();
@@ -133,10 +134,8 @@ const addBtns = () => {
     }))
 
     addTaskContainerBtn.addEventListener('click', () => {
-        // const taskDescription = document.querySelector("[data-task-description]");
         clearInput(addTaskContainer);
         addTaskContainer.style.display = 'flex';
-        // taskDescription.textContent = '';
         const taskTitle = addTaskContainer.querySelector("[data-project-title]")
         const taskEditBtn = addTaskContainer.querySelector("[data-add-task-btn]");
 
