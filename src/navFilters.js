@@ -1,20 +1,24 @@
-import render, { clearElement, projects } from "./CRUD"
+import render, { clearElement, projects, selectedProject, selectedTask } from "./CRUD"
 import { renderTask } from "./DOM"
 import { compareAsc, format, isThisWeek, parse} from 'date-fns'
+// import { projects, selectedProject, selectedTask } from "./constants";
 
 const taskContainer = document.querySelector("[data-task-container]");
 
+// Selects all tasks
 export const AllTasks = () => {
     clearElement(taskContainer);
     projects.forEach(project => project.tasks.forEach(task => renderTask(task)))
 }
 
+// Filters all tasks that are due today
 export const TodayTasks = () => {
     clearElement(taskContainer);
     const todaysDate = format(new Date(), 'yyyy-MM-dd');
     projects.forEach(project => project.tasks.forEach(task => (task.date == todaysDate) ? renderTask(task) : ''))
 }
 
+// Filters all tasks that are due this week
 export const WeeklyTasks = () => {
     clearElement(taskContainer);
     projects.forEach(project => project.tasks.forEach(task => {
@@ -23,11 +27,13 @@ export const WeeklyTasks = () => {
     }))
 }
 
+// Filters all tasks that are marked as important
 export const importantTasks = () => {
     clearElement(taskContainer);
     projects.forEach(project => project.tasks.forEach(task => (task.priority === 'important') ? renderTask(task) : ''))
 }
 
+// Filters all tasks that are completed
 export const completedTasks = () => {
     clearElement(taskContainer);
     projects.forEach(project => project.tasks.forEach(task => (task.complete) ? renderTask(task) : ''))

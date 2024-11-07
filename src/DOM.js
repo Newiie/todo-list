@@ -1,39 +1,52 @@
-import { clearElement, deleteProject, addTask, projects, selectedProject, infoEdit, selectedTask, editTask, deleteTask} from "./CRUD";
-import { AllTasks, TodayTasks, WeeklyTasks, completedTasks, importantTasks } from "./IMPORTANCE";
+import { clearElement, deleteProject, addTask, projects, setSelectedProject, selectedProject, infoEdit, setSelectedTask, selectedTask, editTask, deleteTask} from "./CRUD";
+import { AllTasks, TodayTasks, WeeklyTasks, completedTasks, importantTasks } from "./NavFilters";
 import { chosenIcon, clearInput, clearSelectedIcon, findProject, populateEditTaskContainer, save, saveAndRenderTask } from "./util";
 
-const iconsContainer = document.querySelector("[data-icons-container]");
-const addProjectBtn = document.querySelector("[data-ap-add-btn]");
+// ---------- DOM ELEMENTS FOR CONTAINERS ---------------
 const projectContainer = document.querySelector("[data-project-container]");
-const todoHeader = document.querySelector("[data-todo-header]");
-const dueDates = document.querySelector("[data-due-dates]");
-const addProjectBtnContainer = document.querySelector("[data-add-project-btn]");
+const taskContainer = document.querySelector("[data-task-container]");
 const addProjectContainer = document.querySelector("[data-add-project-container]");
+const addTaskContainer = document.querySelector("[data-add-task-container]");
+const iconsContainer = document.querySelector("[data-icons-container]");
+
+// ---------- DOM ELEMENTS FOR ADD BTNS ---------------
+const addProjectBtn = document.querySelector("[data-ap-add-btn]");
+const addProjectBtnContainer = document.querySelector("[data-add-project-btn]");
+const addTaskContainerBtn = document.querySelector("[data-add-task]");
+
+// ---------- DOM ELEMENTS FOR CLOSE BTNS ---------------
 const closeProjectBtn = document.querySelector("[data-close-project-btn]");
-const apCancelBtn = document.querySelector("[data-ap-cancel-btn]");
+const addTaskCloseBtn = document.querySelector("[data-at-close-btn]");
 const dmCloseBtn = document.querySelector("[data-dm-close-button]");
-const deleteModal = document.querySelector("[data-delete-modal]");
+const imCloseBtn = document.querySelector("[data-im-close-btn]")
+
+// ---------- DOM ELEMENTS FOR CANCEL BTNS ---------------
+const apCancelBtn = document.querySelector("[data-ap-cancel-btn]");
+const addTaskCancelBtn = document.querySelector("[data-at-cancel-btn]");
 const dmCancelBtn = document.querySelector("[data-dm-cancel-btn]");
 const dmDeleteBtn = document.querySelector("[data-dm-delete-btn]");
+
+// ---------- DOM ELEMENTS FOR HEADER ---------------
+const todoHeader = document.querySelector("[data-todo-header]");
+const dueDates = document.querySelector("[data-due-dates]");
+const deleteModal = document.querySelector("[data-delete-modal]");
 const dueDate = dueDates.querySelectorAll(".date");
-const addTaskContainerBtn = document.querySelector("[data-add-task]");
-const addTaskContainer = document.querySelector("[data-add-task-container]");
-const addTaskCancelBtn = document.querySelector("[data-at-cancel-btn]");
-const addTaskCloseBtn = document.querySelector("[data-at-close-btn]");
-const taskContainer = document.querySelector("[data-task-container]");
 const projectTemplate = document.getElementById("project-template");
 const infoModal = document.querySelector("[data-info-modal]")
+const infoModalCancelBtn = document.querySelector("[ data-info-cancel-btn]")
+
+// ---------- DOM ELEMENTS FOR DATES ---------------
 const allTasksBtn = document.querySelector("[data-all-tasks]");
 const todayTasksBtn = document.querySelector("[data-today-tasks]");
 const weeklyTasksBtn = document.querySelector("[data-weekly-tasks]");
 const importantTasksBtn = document.querySelector("[data-important-tasks]");
 const completedTasksBtn = document.querySelector("[data-completed-tasks]");
-const infoModalCancelBtn = document.querySelector("[ data-info-cancel-btn]")
+
+// ---------- DOM ELEMENTS FOR MENU ---------------
 const menuBtn = document.querySelector("[data-menu-btn]")
 const headerDiv = document.querySelector("[data-nav-bar]")
-const imCloseBtn = document.querySelector("[data-im-close-btn]")
 
-
+// ---------- EVENTS FOR DUE DATES ---------------
 const dueDateEvents = () => {
     dueDates.addEventListener('click', (e) => {
         if (e.target.tagName.toLowerCase() == "li") {
@@ -68,7 +81,8 @@ const dueDateEvents = () => {
     })
 }
 
-const addBtns = () => {
+// ---------- EVENTS FOR BTNS ---------------
+const buttonEvents = () => {
     const prioritySelect = document.getElementById("prioritySelect");
 
     prioritySelect.addEventListener("change", function() {
@@ -168,10 +182,11 @@ const addBtns = () => {
 
     taskContainer.addEventListener('click', (e) => {
         if (e.target.tagName.toLowerCase != 'div' && !e.target.classList.contains("task")) return;
-        selectedTask = e.target;
+        setSelectedTask(e.target);
     })
 }
 
+// ---------- EVENTS FOR ICONS ---------------
 const iconsEvent = () => {
     iconsContainer.addEventListener('click', (e) => {
        if(e.target.tagName.toLowerCase() == 'div') {
@@ -189,15 +204,20 @@ const iconsEvent = () => {
                 document.querySelector(".project-selected").classList.remove("project-selected");
             e.target.classList.add("project-selected");
 
-            selectedProject = e.target;
+            console.log("e.target", e.target)
+            console.log("selectedProject", selectedProject)
+            setSelectedProject(e.target)
             saveAndRenderTask();
         }
     })
     
 }
 
+// ---------- Render a task based on the task object and binds events to it ---------------
 export const renderTask = (task) => {
     const taskTemplateContainer = document.querySelector("#task-template");
+    
+    // converts the task template into a node element
     const taskTemplate = document.importNode(taskTemplateContainer.content, true);
     const taskDescription = taskTemplate.querySelector("[data-task-description]");
     const taskCheckBox = taskTemplate.querySelector("[data-task-checkbox]");
@@ -206,6 +226,7 @@ export const renderTask = (task) => {
     const taskInfoBtn = taskTemplate.querySelector("[data-task-info]");
     const taskElement = taskTemplate.querySelector("[data-task-body]")
 
+    // Binds the events each of these btns
     taskInfoBtn.addEventListener('click', () => {
         const infoTitle = document.querySelector("[data-info-title]")
         const infoDesc = document.querySelector("[data-info-desc]");
@@ -241,7 +262,7 @@ export const renderTask = (task) => {
         taskTitle.textContent = 'Edit Task';
         taskFormEditBtn.textContent = 'Edit';
         
-        selectedTask = taskEditBtn.closest("[data-task-body]");
+        setSelectedTask(taskEditBtn.closest("[data-task-body]"));
         findProject(taskEditBtn.closest("[data-task-body]").getAttribute("id"));
 
         populateEditTaskContainer();
@@ -252,7 +273,7 @@ export const renderTask = (task) => {
         deleteModal.setAttribute("id", "task-deletion")
         const dmLabel = deleteModal.querySelector(".dm-label");
 
-        selectedTask = taskDeleteBtn.closest("[data-task-body]");
+        setSelectedTask(taskDeleteBtn.closest("[data-task-body]"));
         findProject(taskDeleteBtn.closest("[data-task-body]").getAttribute("id"));
         
         const taskId = selectedTask.getAttribute("id");
@@ -261,7 +282,8 @@ export const renderTask = (task) => {
     })
 
     taskCheckBox.addEventListener('click', () => {
-        selectedTask = taskCheckBox.closest("[data-task-body]");
+        setSelectedTask(taskCheckBox.closest("[data-task-body]"));
+
         const taskId = selectedTask.getAttribute("id");
         projects.find(project => project.tasks.find(task => {
             task.id == taskId ? task.complete = taskCheckBox.checked : '';
@@ -271,6 +293,7 @@ export const renderTask = (task) => {
         save();
     })
 
+    // Sets the id of the task and checks if it is complete
     taskElement.setAttribute("id", task.id);
     taskCheckBox.checked = task.complete;
     task.complete ? taskDescription.classList.add("line-through") : ''
@@ -278,13 +301,18 @@ export const renderTask = (task) => {
     taskContainer.append(taskTemplate); 
 }
 
+// ---------- Render a projects based on the projects array ---------------
 export const renderProject = (projects) => {
     clearElement(projectContainer);
     projects.forEach(project => {
         const iconElement = document.createElement("i");
+
+        // converts the project template into a node element
         const projectElement = document.importNode(projectTemplate.content, true);
         const iconId = project.icon;
         chosenIcon(iconId, iconElement);
+
+        // Selects the elements of the project
         const projectContent = projectElement.querySelector(".project-content");
         const projectLabel = projectElement.querySelector(".project-label");
         const iconEditable = projectElement.querySelector("[data-project-edit]");
@@ -292,10 +320,11 @@ export const renderProject = (projects) => {
         const projectDeleteBtn = projectElement.querySelector("[data-project-delete-btn]")
         const addTask = document.querySelector("[data-add-task]");
 
+        // Binds the events each of these btns 
         iconEditable.addEventListener('click', () => {
             const pcTitle = addProjectContainer.querySelector("h2");
             pcTitle.textContent = "Edit Project";
-            selectedProject = iconEditable.closest(".project");
+            setSelectedProject(iconEditable.closest(".project"));
             addProjectBtn.textContent = "Edit";
             infoEdit(selectedProject.getAttribute("id"))
             addProjectContainer.style.display = "flex";
@@ -305,7 +334,7 @@ export const renderProject = (projects) => {
             const deleteLabel = deleteModal.querySelector(".dm-label");
             deleteModal.setAttribute("id", "project-deletion");
             deleteModal.style.display = 'flex';
-            selectedProject = projectDeleteBtn.closest(".project");
+            setSelectedProject(projectDeleteBtn.closest(".project"));
             const project = projects.find(project => project.id == selectedProject.id);
             deleteLabel.textContent = `${project.name}`;
         })
@@ -323,15 +352,19 @@ export const renderProject = (projects) => {
             todoHeader.append(todoHeaderElement)
         })
 
+        // Sets the id of the project
         projectE.setAttribute("id", project.id);
         projectLabel.textContent = project.name;
         projectContent.insertBefore(iconElement, projectContent.firstElementChild);
+
+        
         projectContainer.append(projectElement);
     })
 }
 
+// ------ BIND ALL EVENTS ---------------
 const events = () => {
-    addBtns();
+    buttonEvents();
     dueDateEvents();
     iconsEvent();
     renderProject(projects);

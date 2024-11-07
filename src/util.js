@@ -1,5 +1,6 @@
-import { clearElement, projects, selectProject, selectedProject, selectedTask } from "./CRUD";
+import { clearElement, projects, setSelectedProject, selectedProject, setSelectedTask, selectedTask } from "./CRUD";
 import { renderProject, renderTask } from "./DOM";
+import { LOCAL_STORAGE_PROJECTS_KEY, LOCAL_STORAGE_SELECTED_PROJECT_KEY } from "./config";
 
 const taskContainer = document.querySelector("[data-task-container]");
 const addProjectBtn = document.querySelector("[data-ap-add-btn]");
@@ -24,12 +25,13 @@ export const editProject = (selectedProject, icon, name) => {
     addProjectBtn.textContent = "Add";
 }
 
-
+// Clears the icon-selected class from all icons
 export const clearSelectedIcon = () => {
     const selectedIcons = document.querySelectorAll(".icon-selected");
     selectedIcons.forEach(si => si.classList.remove("icon-selected"));
 }
 
+// Clears the input fields
 export const clearInput = (container) => {
     const inputs = container.querySelectorAll("input");
     inputs.forEach(input => input.value = "");
@@ -39,6 +41,7 @@ export const clearInput = (container) => {
     }
 }
 
+// Populates the edit task container with the selected task's data
 export const populateEditTaskContainer = () => {
     const taskId = selectedTask.getAttribute("id");
     const projectID =  selectedProject.getAttribute("id");
@@ -57,19 +60,19 @@ export const populateEditTaskContainer = () => {
     taskPriority.value = taskItem.priority;
 }
 
-export const LOCAL_STORAGE_PROJECTS_KEY = 'todo-list.projects'
-export const LOCAL_STORAGE_SELECTED_PROJECT_KEY = 'todo-list.selectedProject';
-
+// Saves the projects and selected project to localstorage
 export function save() {
     localStorage.setItem(LOCAL_STORAGE_PROJECTS_KEY, JSON.stringify(projects));
-    localStorage.setItem(LOCAL_STORAGE_SELECTED_PROJECT_KEY, JSON.stringify(selectedProject));
+    localStorage.setItem(LOCAL_STORAGE_SELECTED_PROJECT_KEY, JSON.stringify(selectedProject || ""));
 }
 
+// Saves the projects and renders the project
 export function saveAndRenderProject(projects) {
     save();
     renderProject(projects);
 }
 
+// Saves the projects and renders the task
 export function saveAndRenderTask() {
     const projectID =  selectedProject.getAttribute("id");
     const project = projects.find(project => project.id == projectID);
@@ -78,11 +81,18 @@ export function saveAndRenderTask() {
     project.tasks.forEach(task => renderTask(task));
 }
 
+// Selects a project from the localstorage that was previously selected
+export const selectProject = (selected) => {
+    setSelectedProject(document.getElementById(selected.id));
+}
+
+// Finds the project that contains the task and selects it
 export const findProject = (taskId) => {
     const project = projects.find(project => project.tasks.find(task => task.id == taskId))
     selectProject(project);
 }
 
+// Chooses the icon based on the iconId and adds it to the iconElement
 export function chosenIcon(iconId, iconElement) {
     switch (iconId) {
         case "fa-book":
