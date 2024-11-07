@@ -1,6 +1,6 @@
-import { clearSelectedIcon, editProject, saveAndRenderProject, saveAndRenderTask } from "./util";
+import { clearSelectedIcon, editProject } from "./util";
 import { selectedProject, selectedTask, projects, removeProject } from "./utils/constants";
-
+import { saveAndRenderProject, saveAndRenderTask } from "./utils/storage";
 import { createTask } from "./components/createTask";
 import Project from "./models/Project";
 import TaskForm from "./components/TaskForm";
@@ -10,17 +10,9 @@ const addProjectBtn = document.querySelector("[data-ap-add-btn]");
 const addProjectContainer = document.querySelector("[data-add-project-container]");
 const iconsContainer = document.querySelector("[data-icons-container]");
 const projectTitle = document.querySelector("[data-add-project-text-title]");
-const deleteModal = document.querySelector("[data-delete-modal]");
 
 // helper variable
 let selectedProjectArray = "";
-
-// Selects a project from the localstorage that was previously selected
-export const selectProject = (selected) => {
-    selectedProject = document.getElementById(selected.id);
-}
-
-
 
 // calls an event listener to the add project button
 export const addProject = () => {

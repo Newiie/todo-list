@@ -1,6 +1,6 @@
 import  { clearElement } from "./util"
 import { projects} from "./utils/constants";
-import { renderTask } from "./DOM"
+import { renderTask } from "./domEvents"
 import {  format, isThisWeek, parse} from 'date-fns'
 
 const taskContainer = document.querySelector("[data-task-container]");

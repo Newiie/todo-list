@@ -1,7 +1,8 @@
-import { deleteProject, addTask, infoEdit, editTask, deleteTask} from "./CRUD";
+import { deleteProject, addTask, infoEdit, editTask, deleteTask} from "./ui";
 import { allTasks, todayTasks, weeklyTasks, completedTasks, importantTasks } from "./taskFilters";
-import { chosenIcon, clearElement, clearInput, clearSelectedIcon, findProject, populateEditTaskContainer, save, saveAndRenderTask } from "./util";
+import { clearElement, clearInput, clearSelectedIcon, findProject, populateEditTaskContainer } from "./util";
 import { selectedProject, selectedTask, projects, setSelectedProject, setSelectedTask } from "./utils/constants";
+import { saveAndRenderTask } from "./utils/storage";
 import { createTodoHeader } from "./components/TodoHeader";
 import createIcon from "./components/createIcon";
 import { createProject } from "./components/createProject";
@@ -274,7 +275,7 @@ export const renderTask = (task) => {
             }
         }
 
-        const {infoProject} = changeTaskInformation(task);
+        const { infoProject } = changeTaskInformation(task);
 
         findProject(taskInfoBtn.closest("[data-task-body]").getAttribute("id"));
         infoProject.textContent = projects.find(project => project.id == selectedProject.getAttribute("id")).name;
@@ -337,25 +338,8 @@ export const renderProject = (projects) => {
     clearElement(projectContainer);
 
     projects.forEach(project => {
-        // const iconElement = document.createElement("i");
-
-        // converts the project template into a node element
-        // const iconId = project.icon;
-        // chosenIcon(iconId, iconElement);
-
         const projectIcon = createIcon(project.icon);
-        
-
         const { projectElement,projectContent, projectLabel, iconEditable, projectE, projectDeleteBtn} = createProject();
-
-        // Selects the elements of the project
-        // const projectElement = document.importNode(projectTemplate.content, true);
-        // const projectContent = projectElement.querySelector(".project-content");
-        // const projectLabel = projectElement.querySelector(".project-label");
-        // const iconEditable = projectElement.querySelector("[data-project-edit]");
-        // const projectE = projectElement.querySelector(".project");
-        // const projectDeleteBtn = projectElement.querySelector("[data-project-delete-btn]")
-        
         const addTask = document.querySelector("[data-add-task]");
 
         // Binds the events each of these btns 

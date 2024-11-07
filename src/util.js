@@ -1,36 +1,10 @@
-import { renderProject, renderTask } from "./DOM";
+import { renderProject, renderTask } from "./domEvents";
 import { projects, selectedProject, selectedTask, setSelectedProject } from "./utils/constants";
 import { LOCAL_STORAGE_PROJECTS_KEY, LOCAL_STORAGE_SELECTED_PROJECT_KEY } from "./utils/config";
 import TaskForm from "./components/TaskForm";
 import createIcon from "./components/createIcon";
 
-const taskContainer = document.querySelector("[data-task-container]");
 
-export const editProject = (selectedProject, icon, name) => {
-    const addProjectContainer = document.querySelector("[data-add-project-container]");
-
-    const projectTitle = document.querySelector("[data-add-project-text-title]");
-    const addProjectBtn = document.querySelector("[data-ap-add-btn]");
-
-    const child = selectedProject.querySelector(".fa-solid");
-    const projectContent = selectedProject.querySelector(".project-content");
-    const projectLabel = selectedProject.querySelector(".project-label");
-
-    const projectIcon = createIcon(icon);
-    const pcTitle = addProjectContainer.querySelector("h2");
-
-    projectContent.removeChild(child);
-
-    projectContent.insertBefore(projectIcon, projectContent.firstElementChild);
-    projectLabel.textContent = name;
-    addProjectContainer.style.display = 'none';
-    clearSelectedIcon();
-    
-    // reset the text of the modal
-    projectTitle.value = '';
-    pcTitle.textContent = "Add Project";
-    addProjectBtn.textContent = "Add";
-}
 
 // Clears the icon-selected class from all icons
 export const clearSelectedIcon = () => {
@@ -77,32 +51,6 @@ const populateTaskForm = (taskItem) => {
     taskPriority.value = taskItem.priority;
 }
 
-// Saves the projects and selected project to localstorage
-export function save() {
-    localStorage.setItem(LOCAL_STORAGE_PROJECTS_KEY, JSON.stringify(projects));
-    localStorage.setItem(LOCAL_STORAGE_SELECTED_PROJECT_KEY, JSON.stringify(selectedProject || ""));
-}
-
-// Saves the projects and renders the project
-export function saveAndRenderProject(projects) {
-    save();
-    renderProject(projects);
-}
-
-// Saves the projects and renders the task
-export function saveAndRenderTask() {
-
-    const projectID =  selectedProject.getAttribute("id");
-    const project = projects.find(project => project.id == projectID);
-    
-    save()
-    clearElement(taskContainer);
-
-    if (project) {
-        project.tasks.forEach(task => renderTask(task));
-    }
-}
-
 // Selects a project from the localstorage that was previously selected
 export const selectProject = (selected) => {
     setSelectedProject(document.getElementById(selected.id));
@@ -116,30 +64,29 @@ export const findProject = (taskId) => {
     selectProject(project);
 }
 
+// Edits the project
+export const editProject = (selectedProject, icon, name) => {
+    const addProjectContainer = document.querySelector("[data-add-project-container]");
 
-// Chooses the icon based on the iconId and adds it to the iconElement
-export function chosenIcon(iconId, iconElement) {
-    switch (iconId) {
-        case "fa-book":
-            iconElement.classList.add("fa-solid", "fa-book");
-            break;
-        case "fa-hammer":
-            iconElement.classList.add("fa-solid", "fa-hammer");
-            break;
-        case "fa-volleyball":
-            iconElement.classList.add("fa-solid", "fa-volleyball");
-            break;
-        case "fa-sack-dollar":
-            iconElement.classList.add("fa-solid", "fa-sack-dollar");
-            break;
-        case "fa-pizza-slice":
-            iconElement.classList.add("fa-solid", "fa-pizza-slice");
-            break;
-        case "fa-school":
-            iconElement.classList.add("fa-solid", "fa-school");
-            break;
-        case "fa-gift":
-            iconElement.classList.add("fa-solid", "fa-gift");
-            break;
-    }
+    const projectTitle = document.querySelector("[data-add-project-text-title]");
+    const addProjectBtn = document.querySelector("[data-ap-add-btn]");
+
+    const child = selectedProject.querySelector(".fa-solid");
+    const projectContent = selectedProject.querySelector(".project-content");
+    const projectLabel = selectedProject.querySelector(".project-label");
+
+    const projectIcon = createIcon(icon);
+    const pcTitle = addProjectContainer.querySelector("h2");
+
+    projectContent.removeChild(child);
+
+    projectContent.insertBefore(projectIcon, projectContent.firstElementChild);
+    projectLabel.textContent = name;
+    addProjectContainer.style.display = 'none';
+    clearSelectedIcon();
+    
+    // reset the text of the modal
+    projectTitle.value = '';
+    pcTitle.textContent = "Add Project";
+    addProjectBtn.textContent = "Add";
 }

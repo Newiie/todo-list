@@ -1,7 +1,7 @@
-import render from './CRUD'
-import events from './DOM'
+import render from './ui'
+import events from './domEvents'
 import { allTasks } from './taskFilters';
-import { save } from './util';
+import { save } from './utils/storage';
 
 render();
 events();
