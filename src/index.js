@@ -1,9 +1,9 @@
 import render from './CRUD'
 import events from './DOM'
-import { AllTasks } from './NavFilters';
+import { allTasks } from './taskFilters';
 import { save } from './util';
 
 render();
 events();
 save();
-AllTasks();
+allTasks();

@@ -6,20 +6,20 @@ import {  format, isThisWeek, parse} from 'date-fns'
 const taskContainer = document.querySelector("[data-task-container]");
 
 // Selects all tasks
-export const AllTasks = () => {
+export const allTasks = () => {
     clearElement(taskContainer);
     projects.forEach(project => project.tasks.forEach(task => renderTask(task)))
 }
 
 // Filters all tasks that are due today
-export const TodayTasks = () => {
+export const todayTasks = () => {
     clearElement(taskContainer);
     const todaysDate = format(new Date(), 'yyyy-MM-dd');
     projects.forEach(project => project.tasks.forEach(task => (task.date == todaysDate) ? renderTask(task) : ''))
 }
 
 // Filters all tasks that are due this week
-export const WeeklyTasks = () => {
+export const weeklyTasks = () => {
     clearElement(taskContainer);
     projects.forEach(project => project.tasks.forEach(task => {
         const date = parse(task.date, 'yyyy-MM-dd', new Date());

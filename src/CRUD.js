@@ -54,13 +54,11 @@ export const addProject = () => {
     })
 }
 
-// deletes a project
 export const deleteProject = () => {
     removeProject(selectedProject.id);
     saveAndRenderProject(projects);
 }
 
-// edits a project
 export function infoEdit(id) {
     selectedProjectArray = projects.find(project => project.id == id);
     projectTitle.value = selectedProjectArray.name;
@@ -71,7 +69,6 @@ export function infoEdit(id) {
 
 // ---------- CRUD FOR TASK ---------------
 
-// Creates a new task
 export function createTask() {
     const taskForm = document.querySelector("[data-task-form");
     const taskTitle = taskForm.querySelector("[data-task-title]")
@@ -89,7 +86,6 @@ export function createTask() {
     };
 }
 
-// Adds a new task
 export const addTask = () => {
     const projectID =  selectedProject.getAttribute("id");
     const project = projects.find(project => project.id == projectID);
@@ -97,7 +93,6 @@ export const addTask = () => {
     saveAndRenderTask();
 }
 
-// Edits a task
 export const editTask = () => {
     const taskId = selectedTask.getAttribute("id");
     const projectID =  selectedProject.getAttribute("id");
@@ -111,7 +106,6 @@ export const editTask = () => {
     const taskDate = taskForm.querySelector("[data-task-date]");
     const taskPriority = taskForm.querySelector("[data-task-priority]");
 
-    // Dom manipulation
     taskDescription.textContent = '';
     taskItem.title = taskTitle.value;
     taskItem.description = taskDescription.value;
@@ -119,14 +113,11 @@ export const editTask = () => {
     taskItem.priority = taskPriority.value;
 }
 
-// Deletes a task
 export const deleteTask = () => {
     const taskId = selectedTask.getAttribute("id");
     const projectId = selectedProject.getAttribute("id");
 
-    // Finds the project that the task belongs to
     const projectItem = projects.find(project => project.id == projectId);
-    // Deletes the task from the project
     projectItem.tasks = projectItem.tasks.filter(task => task.id != taskId);
 
     saveAndRenderTask();

@@ -1,5 +1,5 @@
 import { clearElement, deleteProject, addTask, infoEdit, editTask, deleteTask} from "./CRUD";
-import { AllTasks, TodayTasks, WeeklyTasks, completedTasks, importantTasks } from "./NavFilters";
+import { allTasks, todayTasks, weeklyTasks, completedTasks, importantTasks } from "./taskFilters";
 import { chosenIcon, clearInput, clearSelectedIcon, findProject, populateEditTaskContainer, save, saveAndRenderTask } from "./util";
 import { selectedProject, selectedTask, projects, setSelectedProject, setSelectedTask } from "./constants";
 
@@ -51,35 +51,23 @@ const headerDiv = document.querySelector("[data-nav-bar]")
 const dueDateEvents = () => {
     dueDates.addEventListener('click', (e) => {
         if (e.target.tagName.toLowerCase() == "li") {
+            // Update header with selected date
             const val = `<i class="${e.target.firstElementChild.className}"></i>` +
             `<p>${e.target.textContent}</p>`;
             todoHeader.innerHTML = val;
+            // Deselect any previously selected project
             if (document.querySelector(".project-selected"))
                 document.querySelector(".project-selected").classList.remove("project-selected");
             e.target.classList.add("project-selected");
-
         }
-    })  
+    });
 
-    allTasksBtn.addEventListener('click', () => {
-        AllTasks();
-    })
-
-    todayTasksBtn.addEventListener('click', () => {
-        TodayTasks();
-    })
-
-    weeklyTasksBtn.addEventListener('click', () => {
-        WeeklyTasks();
-    })
-
-    importantTasksBtn.addEventListener('click', () => {
-        importantTasks();
-    })
-
-    completedTasksBtn.addEventListener('click', () => {
-        completedTasks();
-    })
+    // Filter tasks by date
+    allTasksBtn.addEventListener('click', allTasks);
+    todayTasksBtn.addEventListener('click', todayTasks);
+    weeklyTasksBtn.addEventListener('click', weeklyTasks);
+    importantTasksBtn.addEventListener('click', importantTasks);
+    completedTasksBtn.addEventListener('click', completedTasks);
 }
 
 // ---------- EVENTS FOR BTNS ---------------
@@ -101,7 +89,7 @@ const buttonEvents = () => {
     imCloseBtn.addEventListener('click', () => {
         infoModal.style.display = 'none';
     })
-    
+
     menuBtn.addEventListener('click', () => {
         console.log(headerDiv)
         headerDiv.classList.toggle("active");
