@@ -1,3 +1,4 @@
+// creates a new task form object
 const TaskForm = () => {
     const taskForm = document.querySelector("[data-task-form");
 

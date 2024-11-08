@@ -141,6 +141,10 @@
     font-size: var(--fs-500);
 }
 
+.unclickable {
+  pointer-events: none;
+}
+
 .todo-header {
   display: flex;
   gap: 1rem;

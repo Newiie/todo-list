@@ -1,23 +1,71 @@
-import { LOCAL_STORAGE_PROJECTS_KEY, LOCAL_STORAGE_SELECTED_PROJECT_KEY } from "./config";
-import Task from "../models/Task";
-import Project from "../models/Project";
-
-const dummyTask = Task("Sample Task", "This is a sample description.", "2022-07-07", "important", true);
-const dummyProject = Project("Sample Project", "fa-book", [dummyTask]);
+import { getProjects, getSelectedProject } from "./storage";
+import { createTask } from "../components/createTask";
+import { saveAndRenderTask } from "./storage";
+import TaskForm from "../components/TaskForm";
 
 // Global Variables 
-let selectedProject = JSON.parse(localStorage.getItem(LOCAL_STORAGE_SELECTED_PROJECT_KEY)) || "";
+let selectedProjectArray = "";
+let selectedProject = getSelectedProject();
 let selectedTask = "";
-let projects = JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROJECTS_KEY)) || [
-    dummyProject
-];
+let projects = getProjects();
+let importantFlag = false;
 
+// Important Flag methods
+const setImportantFlag = (flag) => {
+    importantFlag = flag;
+}
+
+// Project methods
+const setSelectedProjectArray = (project) => {
+    selectedProjectArray = project;
+}
+
+// Task methods
+function setSelectedTask(task) {
+    selectedTask = task;
+}
+const addTask = () => {
+    const projectID = selectedProject.getAttribute("id");
+    const project = projects.find(project => project.id == projectID);
+    project.tasks.push(createTask());
+    
+    saveAndRenderTask();
+}
+const editTask = () => {
+    const taskId = selectedTask.getAttribute("id");
+    const projectID =  selectedProject.getAttribute("id");
+
+    const taskItem = projects.find(project => project.id == projectID).tasks.find(task => task.id == taskId);
+   
+    const taskForm = TaskForm();
+    taskForm.taskDescription.textContent = '';
+
+    taskItem.title = taskForm.taskTitle.value;
+    taskItem.description = taskForm.taskDescription.value;
+    taskItem.date = taskForm.taskDate.value;
+    taskItem.priority = taskForm.taskPriority.value;
+
+    
+    saveAndRenderTask();
+}
+const deleteTask = () => {
+    const taskId = selectedTask.getAttribute("id");
+    const projectId = selectedProject.getAttribute("id");
+
+    const projectItem = projects.find(project => project.id == projectId);
+    projectItem.tasks = projectItem.tasks.filter(task => task.id != taskId);
+
+    saveAndRenderTask();
+}
+
+// Project methods
 function setSelectedProject(project) {
     selectedProject = project;
 }
 
-function setSelectedTask(task) {
-    selectedTask = task;
+const findProject = (taskId) => {
+    const project = projects.find(project => project.tasks.find(task => task.id == taskId))
+    setSelectedProject(document.getElementById(project.id));
 }
 
 function setProjects(projects) {
@@ -32,8 +80,16 @@ export {
     selectedProject, 
     selectedTask, 
     projects, 
+    selectedProjectArray,
+    importantFlag,
     setSelectedProject, 
     setSelectedTask,
+    findProject,
     setProjects,
-    removeProject
+    removeProject,
+    setSelectedProjectArray,
+    setImportantFlag,
+    addTask,
+    editTask,
+    deleteTask
 }

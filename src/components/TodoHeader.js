@@ -1,3 +1,4 @@
+// todo header component
 const todoHeader = document.querySelector("[data-todo-header]");
 
 export const changeTodoHeaderTitle = (project) => {

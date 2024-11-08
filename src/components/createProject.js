@@ -1,6 +1,7 @@
 const projectTemplate = document.getElementById("project-template");
 
-export function createProject() {
+// creates a new project object
+export const createProject = () => {
     const projectElement = document.importNode(projectTemplate.content, true);
 
     const projectContent = projectElement.querySelector(".project-content");
