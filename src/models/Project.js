@@ -1,5 +1,5 @@
 import { saveAndRenderProject, saveAndRenderTask } from "../utils/storage";
-import { clearSelectedIcon } from "../util";
+import { clearSelectedIcon } from "../utils/util";
 import { projects, selectedProject, selectedProjectArray, setSelectedProjectArray } from "../utils/constants";
 import { removeProject } from "../utils/constants";
 import createIcon from "../components/createIcon";
@@ -41,6 +41,8 @@ export const addProject = () => {
         selectedProjectArray.name = projectTitle.value;
         editProject(selectedProject, iconID, projectTitle.value)
     }
+
+ 
 }
 
 export const editProject = (selectedProject, icon, name) => {

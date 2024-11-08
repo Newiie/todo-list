@@ -1,5 +1,5 @@
 import { allTasks, todayTasks, weeklyTasks, completedTasks, importantTasks } from "./utils/taskFilters";
-import { clearElement, clearInput, clearSelectedIcon, populateEditTaskContainer } from "./util";
+import { clearElement, clearInput, clearSelectedIcon, populateEditTaskContainer } from "./utils/util";
 import { selectedProject, selectedTask, projects, setSelectedProject, setSelectedTask, findProject, importantFlag, setImportantFlag, addTask, editTask, deleteTask } from "./utils/constants";
 import { saveAndRenderTask } from "./utils/storage";
 import { createTodoHeader } from "./components/TodoHeader";
@@ -356,6 +356,7 @@ const events = () => {
     dueDateEvents();
     iconsEvent();
     renderProject(projects);
+    projects.length == 0 ? document.querySelector(".no-projects").classList.add("show") : '';
 }
 
 document.addEventListener('DOMContentLoaded', events);  

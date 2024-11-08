@@ -151,6 +151,16 @@
     font-size: var(--fs-900);
 }
 
+.no-projects {
+  display: none;
+  text-align: center;
+  font-size: var(--fs-500);
+  color: var(--clr-dark-grey);
+}
+
+.no-projects.show {
+  display: block;
+}
 /* ----------- LAYOUT ----------- */
 #container {
   display: grid;

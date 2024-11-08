@@ -5,7 +5,7 @@ import { renderTask } from "..";
 import { todayTasks, weeklyTasks, importantTasks, completedTasks, allTasks } from "./taskFilters";
 import TaskModel from "../models/Task";
 import ProjectModel from "../models/Project";
-import { clearElement } from "../util";
+import { clearElement } from "./util";
 
 // Dummy data
 const dummyTask = TaskModel("Sample Task", "This is a sample description.", "2022-07-07", "important", true);
@@ -32,7 +32,11 @@ export const getSelectedProject = () => {
 // Saves the projects and renders the project
 export function saveAndRenderProject(projects) {
     save();
+    console.log(projects);
     renderProject(projects);
+
+    // Shows the no projects message if there are no projects
+    projects.length == 0 ? document.querySelector(".no-projects").classList.add("show") : document.querySelector(".no-projects").classList.remove("show");
 }
 
 // Saves the projects and renders the task
@@ -40,6 +44,7 @@ export function saveAndRenderTask() {
     const taskContainer = document.querySelector("[data-task-container]");
     clearElement(taskContainer);
     save();
+
     // Renders the task based on the navigation buttons
     if (typeof selectedProject == "string") {
         if (selectedProject == "All") allTasks();
