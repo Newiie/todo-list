@@ -1,7 +1,6 @@
-import { renderProject, renderTask } from "..";
-import { projects, selectedProject, selectedTask, setSelectedProject } from "./constants";
-import { LOCAL_STORAGE_PROJECTS_KEY, LOCAL_STORAGE_SELECTED_PROJECT_KEY } from "./config";
+import { projects, selectedProject } from "../modules/project";
 import TaskForm from "../components/TaskForm";
+import { selectedTask } from "../modules/task";
 
 // Clears the icon-selected class from all icons
 const clearSelectedIcon = () => {

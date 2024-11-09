@@ -1,11 +1,11 @@
 import  { clearElement } from "./util"
-import { projects, setSelectedProject} from "./constants";
-import { renderTask } from ".."
+import { projects, setSelectedProject} from "../modules/project";
+import { renderTask } from "../index"
 import {  format, isThisWeek, parse} from 'date-fns'
 
 const taskContainer = document.querySelector("[data-task-container]");
 
-// Selects all tasks
+// Renders all tasks
 export const allTasks = () => {
     clearElement(taskContainer);
     setSelectedProject("All");
@@ -16,7 +16,7 @@ export const allTasks = () => {
     })
 }
 
-// Filters all tasks that are due today
+// Renders all tasks that are due today
 export const todayTasks = () => {
     clearElement(taskContainer);
     setSelectedProject("Today");
@@ -24,7 +24,7 @@ export const todayTasks = () => {
     projects.forEach(project => project.tasks.forEach(task => (task.date == todaysDate) ? renderTask(task) : ''))
 }
 
-// Filters all tasks that are due this week
+// Renders all tasks that are due this week
 export const weeklyTasks = () => {
     clearElement(taskContainer);
     setSelectedProject("Weekly");
@@ -34,14 +34,14 @@ export const weeklyTasks = () => {
     }))
 }
 
-// Filters all tasks that are marked as important
+// Renders all tasks that are marked as important
 export const importantTasks = () => {
     clearElement(taskContainer);
     setSelectedProject("Important");
     projects.forEach(project => project.tasks.forEach(task => (task.priority === 'important') ? renderTask(task) : ''))
 }
 
-// Filters all tasks that are completed
+// Renders all tasks that are completed
 export const completedTasks = () => {
     clearElement(taskContainer);
     setSelectedProject("Completed");

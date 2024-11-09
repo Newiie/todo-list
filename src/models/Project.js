@@ -1,7 +1,8 @@
 import { saveAndRenderProject, saveAndRenderTask } from "../utils/storage";
 import { clearSelectedIcon } from "../utils/util";
-import { projects, selectedProject, selectedProjectArray, setSelectedProjectArray } from "../utils/constants";
-import { removeProject } from "../utils/constants";
+import { changeTodoHeaderTitle } from "../components/TodoHeader";
+import { removeProject , projects, selectedProject} from "../modules/project";
+import { setSelectedProjectArray, selectedProjectArray } from "../modules/helper";
 import createIcon from "../components/createIcon";
 const projectTitle = document.querySelector("[data-add-project-text-title]");
 
@@ -22,9 +23,13 @@ export const addProject = () => {
     const addProjectContainer = document.querySelector("[data-add-project-container]");
     const iconsContainer = document.querySelector("[data-icons-container]");
     const selectedIcon = iconsContainer.querySelector(".icon-selected");
-
+    const errorMsg = addProjectContainer.querySelector("[data-ap-error-msg]");
     // Checks if the icon is selected and the project title is not empty
-    if (!selectedIcon || projectTitle.value === '') return;
+    if (!selectedIcon || projectTitle.value === '') {
+       
+        errorMsg.classList.add("show");
+        return;
+    };
 
     const iconID = selectedIcon.getAttribute("id");
 
@@ -42,7 +47,7 @@ export const addProject = () => {
         editProject(selectedProject, iconID, projectTitle.value)
     }
 
- 
+    errorMsg.classList.remove("show");
 }
 
 export const editProject = (selectedProject, icon, name) => {
@@ -74,6 +79,7 @@ export const deleteProject = () => {
     removeProject(selectedProject.id);
     saveAndRenderProject(projects);
     saveAndRenderTask();
+    changeTodoHeaderTitle(null);
 }
 
 

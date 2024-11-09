@@ -1,7 +1,7 @@
 import { LOCAL_STORAGE_PROJECTS_KEY, LOCAL_STORAGE_SELECTED_PROJECT_KEY } from "./config";
-import { projects, selectedProject } from "./constants";
-import { renderProject } from "..";
-import { renderTask } from "..";
+import { projects, selectedProject } from "../modules/project";
+import { renderProject } from "../index";
+import { renderTask } from "../index";
 import { todayTasks, weeklyTasks, importantTasks, completedTasks, allTasks } from "./taskFilters";
 import TaskModel from "../models/Task";
 import ProjectModel from "../models/Project";

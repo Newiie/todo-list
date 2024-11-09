@@ -4,15 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="main.js" defer></script>
+    
+    <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/3481f02be2.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <!-- CSS STYLES -->
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="utils.css">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Todolist</title>
 </head>
 <body>
+    <!-- WRAPPER -->
     <div id="container">
+        <!-- HEADER -->
         <header class="header">
             <i class="fa-solid fa-bars menu" data-menu-btn></i>
             <i class="fa-solid fa-check-double"></i>
@@ -64,7 +72,6 @@
                     <hr>
                     <div class="credits-container">
                         <div class="credit">Crafted by <span class="clr-name">Newiie</span></div>
-                        <div class="credit">Credits for <span class="clr-name">mooniiDev</span> for Design</div>
                     </div>
                 </div>
             </div>
@@ -72,19 +79,26 @@
         <!-- CONTENT BODY -->
         <div class="todo-container">
             <h1 class="todo-header" data-todo-header>Craft Another Project</h1>
-
+            
             <div class="todo-body">
                 <div class="task-header-container">
                     <div class="task-header">Tasks</div>
                     <i class="fa-solid fa-circle-plus check" data-add-task></i>
                 </div>
                 <hr>
+                <!------------------------------------
+                ------------ TASKS AREA------------
+                ------------------------------------->
                 <div class="tasks-container" data-task-container>
                 </div>
             </div>
         </div>
 
-        <!-- ALL BELOW ARE MODALS -->
+        <!------------------------------------
+        ------------MODALS AREA------------
+        ------------------------------------->
+
+        <!-- ADD PROJECT MODAL -->
         <div class="add-project modal" data-add-project-container>
             <div class="ap-body">
                 <div class="add-project-title">
@@ -107,6 +121,7 @@
                         <div class="icon" id="fa-gift"><i class="fa-solid fa-gift"></i></div> 
                     </div>
                 </div>
+                <p class="error-msg" data-ap-error-msg>All inputs are required</p>
                 <hr class="hr-90">
                 <div class="add-project-btns">
                     <button class="cancel-btn" data-ap-cancel-btn>Cancel</button>
@@ -120,6 +135,7 @@
                     <h2 class="modal-title" data-project-title>Add Task</h2>
                     <i class="fa-solid fa-xmark apbody-close-btn" data-at-close-btn></i>
                 </div>
+                <!-- TASK FORM -->
                 <form class="task-form" action="" data-task-form>
                     <label for="task-title">Title*</label>
                     <input type="text" name="task-title" id="task-title" data-task-title>
@@ -135,6 +151,7 @@
                         <option value="abitimportant">A bit Important</option>
                         <option value="important">Very Important</option>
                     </select>
+                    <p class="error-msg" data-task-error-msg>All inputs are required</p>
                     <hr>
                     <div class="add-project-btns">
                         <button type="button" class="cancel-btn" data-at-cancel-btn>Cancel</button>
@@ -207,7 +224,11 @@
         </div>
     </div>
 
-    <!-- TEMPLATE AREA -->
+    <!------------------------------------
+     ------------TEMPLATE AREA------------
+     ------------------------------------->
+
+    <!-- PROJECT TEMPLATE -->
     <template id="project-template">
         <div class="project">
             <div class="project-content unclickable">
@@ -224,6 +245,7 @@
         </div>
     </template>
 
+    <!-- TASK TEMPLATE -->
     <template id="task-template">
         <div class="task" data-task-body>
             <div class="task-content">

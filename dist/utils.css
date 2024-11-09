@@ -1,0 +1,82 @@
+.error-msg {
+    color: var(--clr-dark-red);
+    font-size: var(--fs-450);
+    margin: 0 0 0 1rem !important;
+    display: none;
+}
+
+.error-msg.show {
+    display: block;
+}
+
+.no-projects {
+    display: none;
+    text-align: center;
+    font-size: var(--fs-500);
+    color: var(--clr-dark-grey);
+  }
+  
+  .no-projects.show {
+    display: block;
+  }
+  
+
+  
+.unclickable {
+    pointer-events: none;
+}
+  
+.hr-90 {
+    width: 90%;
+}
+
+hr {
+    display: block;
+    height: 2px;
+    border: 0;
+    border-top: 2px solid var(--clr-grey);
+    margin: 1em 0;
+    padding: 0;
+    width: 100%;
+}
+
+h2 {
+    font-size: var(--size-600);
+}
+
+.icon i {
+    pointer-events: none;
+}
+
+
+.fa-circle-plus, .fa-trash-can, .fa-pen-to-square, .fa-circle-info {
+    cursor: pointer;
+}
+
+.line-through {
+    text-decoration: line-through;
+}
+
+input {
+    color: var(--clr-dark-grey);
+}
+
+select {
+    padding: 0.6rem;
+    border-radius: 3px;
+    border: 1px solid var(--clr-grey);
+    background-color: var(--clr--netural-100);
+}
+
+select:focus {
+    border: 1px solid var(--clr--accent);
+}
+
+textarea {
+    border: 1px solid var(--clr-grey);
+    border-radius: 3px;
+}
+
+.check {
+    display: none;
+}

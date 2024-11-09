@@ -39,95 +39,18 @@
 }
 
 
+/* INITIAL SETTINGS */
 @media (min-width: 50em) {
     :root {
       --fs-body: var(--fs-500);
       --fs-primary-heading: var(--fs-900);
       --fs-secondary-heading: var(--fs-800);
-      
       --fs-nav: var(--fs-300);
     }
-    
-  }
-  /* CSS RESET */
-  /* Box sizing rules */
-  *:not(i),
-  *::before:not(i),
-  *::after:not(i) {
-    font-family: var(--ff-roboto);
-    box-sizing: border-box;
-  }
-  
-  * {
-    margin: 0;
-    padding: 0;
-    font: inherit;
-    font-family: var(--ff-roboto);
-  }
-  /* Remove default margin */
-  body,
-  h1,
-  h2,
-  h3,
-  h4,
-  p,
-  figure,
-  blockquote,
-  dl,
-  dd {
-    margin: 0;
-  }
-  
-  /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-  ul[role='list'],
-  ol[role='list'] {
-    list-style: none;
-  }
-  
-  /* Set core root defaults */
-  html:focus-within {
-    scroll-behavior: smooth;
-  }
-  
-  html,
-  body {
-    height: 100%;
-  }
-  /* Set core body defaults */
-  body {
-    text-rendering: optimizeSpeed;
-  }
-  
-  /* A elements that don't have a class get default styles */
-  a:not([class]) {
-    text-decoration-skip-ink: auto;
-  }
-  
-  /* Make images easier to work with */
-  img,
-  picture,
-  svg {
-    max-width: 100%;
-    display: block;
-  }
-  
-  /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
-  @media (prefers-reduced-motion: reduce) {
-    html:focus-within {
-     scroll-behavior: auto;
-    }
-    
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
+}
 
 
+/* FONT SIZES */
 .date, .project-label {
     font-size: var(--fs-450);
 }
@@ -141,27 +64,20 @@
     font-size: var(--fs-500);
 }
 
-.unclickable {
-  pointer-events: none;
-}
-
 .todo-header {
   display: flex;
   gap: 1rem;
-    font-size: var(--fs-900);
-}
-
-.no-projects {
-  display: none;
+  font-size: var(--fs-900);
   text-align: center;
-  font-size: var(--fs-500);
-  color: var(--clr-dark-grey);
 }
 
-.no-projects.show {
-  display: block;
+.projects-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
 }
-/* ----------- LAYOUT ----------- */
+
+/* ----------- MAIN LAYOUT ----------- */
 #container {
   display: grid;
   grid-template-areas: 
@@ -178,15 +94,19 @@
   position: relative;
 }
 
-
-.hr-90 {
-  width: 90%;
+.todo-container {
+  grid-area: todo-container;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* TODO CONTAINER AND CONTENT */
 .todo-container, .content {
   z-index: 0;
 }
 
+/* BASE MODAL */
 .modal {
   position: absolute;
   justify-content: center;
@@ -201,12 +121,21 @@
   margin: 0;
 }
 
+/* NAV BAR */
 .menu {
   width: 1px;
   aspect-ratio: 1;
   opacity: 0;
 }
 
+.nav-bar {
+  grid-area: nav-bar;
+  background-color: var(--clr--netural-900);
+  padding: 2.5rem 1.5rem;
+  width: 15rem;
+  color: var(--clr-dark-grey);
+  min-height: calc(100vh - 8.5625rem);
+}
 
 .header {
   grid-area: header;
@@ -214,25 +143,6 @@
   color: var(--clr--neutral-100);
   padding: 1rem 2rem;
   z-index: 5;
-}
-
-.todo-header {
-  text-align: center;
-}
-
-.nav-bar {
-  grid-area: nav-bar;
-  background-color: var(--clr--netural-900);
-  padding: 2.5rem 1.5rem;
-  color: var(--clr-dark-grey);
-  min-height: calc(100vh - 8.5625rem);
-}
-
-.todo-container {
-  grid-area: todo-container;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .date, .project {
@@ -249,6 +159,7 @@
 .project:hover {
   outline: 1px solid var(--clr--accent);
 }
+
 .due-dates > *:not(:first-child) {
   margin-top: 1rem;
 }
@@ -257,12 +168,7 @@
   margin-bottom: 5rem;
 }
 
-.projects-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem 1rem;
-}
-
+/* PROJECTS */
 .project {
   display: flex;
   align-items: center;
@@ -288,6 +194,8 @@
   text-align: center;
 }
 
+/* TODO CONTAINER */
+
 .todo-container {
   display: flex;
   align-items: center;
@@ -301,10 +209,7 @@
   width: 80%;
 }
 
-hr {
-  margin-top: 1rem;
-}
-
+/* TASK STYLES */
 .task {
   display: flex;
   position: relative;
@@ -352,17 +257,8 @@ hr {
   gap: 0.675rem;
 }
 
-hr {
-  display: block;
-  height: 2px;
-  border: 0;
-  border-top: 2px solid var(--clr-grey);
-  margin: 1em 0;
-  padding: 0;
-}
 
 
-/* MODAL */
 /* DISPLAY NONE */
 .add-project {
   display: none;
@@ -371,15 +267,13 @@ hr {
   overflow: hidden;
 }
 
-h2 {
-  font-size: var(--size-600);
-}
-
 .ap-body {
   display: flex;
   flex-direction: column;
   background-color: var(--clr--neutral-100);
   border-radius: 5px;
+  max-width: fit-content;
+  width: 80%;
   box-shadow: 0.5px 0.5px 10px var(--clr-grey),
   -1px 1px 5px var(--clr-dark-grey);
 }
@@ -432,6 +326,7 @@ form input:focus, .add-project-input input:focus {
   border: 1px solid var(--clr--accent);
 }
 
+/* ICONS */
 .icons {
   display: flex;
   gap: 0.5rem;
@@ -468,9 +363,8 @@ form input:focus, .add-project-input input:focus {
   cursor: pointer;
 }
 
-.icon i {
-  pointer-events: none;
-}
+
+/* PROJECT BUTTONS */
 .add-project-btns {
   display: flex;
   justify-content: end;
@@ -512,11 +406,8 @@ form input:focus, .add-project-input input:focus {
   padding: 0 1rem;
 }
 
-.fa-circle-plus, .fa-trash-can, .fa-pen-to-square, .fa-circle-info {
-  cursor: pointer;
-}
 
-/* TASK CONTAINER */
+/* TASK CONTAINER AND INFO MODAL */
 .add-task-container, .info-modal {
   display: none;
   background-color: var(--bg-modal);
@@ -528,6 +419,7 @@ form input:focus, .add-project-input input:focus {
   border: none;
   overflow: scroll;
 }
+
 .add-task-body, .info-modal-body {
   background-color: var(--clr--neutral-100);
   box-shadow: 0.5px 0.5px 3px var(--clr-dark-grey);
@@ -549,6 +441,7 @@ form input:focus, .add-project-input input:focus {
   padding: 1rem;
 }
 
+
 .im-container {
   display: grid;
   grid-template-columns: 25% 70%;
@@ -559,14 +452,7 @@ form input:focus, .add-project-input input:focus {
   font-weight: bold;
 }
 
-.line-through {
-  text-decoration: line-through;
-}
-
-hr {
-  width: 100%;
-}
-
+/* MEDIA QUERIES */
 @media (max-width: 50em) {
   #container {
     display: flex;
@@ -593,13 +479,21 @@ hr {
     box-shadow: 1px 1px 3px var(--clr--netural-900);
   }
 
-  .todo-header {
-    font-size: 2rem;
+  .header {
+    padding: 1rem;
   }
+
+  .todo-header {
+    font-size: var(--fs-800);
+  }
+
+  .task-form {
+    gap: 0.5rem;
+  } 
 
   .menu {
     padding: 8px;
-    margin-right: 2rem;
+    margin-right: 1rem;
     width: 1.6rem;
     aspect-ratio: 1;
     cursor: pointer;
@@ -611,10 +505,11 @@ hr {
   }
 
   .im-container {
-    grid-template-columns: 100%;
-    grid-template-rows: repeat(2, 2rem);
+    display: flex;
+    margin-block: 0.5rem;
   }
 
+  
   .desc-container {
     display: block;
   }
@@ -629,9 +524,15 @@ hr {
     display: block;
   }
 
-  hr {
-    margin: 0.5rem 0;
+  .add-project-icon-container .icons {
+    flex-wrap: wrap;
   }
+  .cancel-btn,
+  .add-btn, 
+  .delete-btn {
+    margin-top: 0.5rem;
+  }
+
   .modal-title {
     font-size: var(--fs-550);
   }
@@ -644,20 +545,12 @@ hr {
   .info-modal-content {
     gap: 0;
   }
-}
+
+  hr {
+    margin: 0.5rem 0;
+  }
 
 
-input {
-  color: var(--clr-dark-grey);
-}
-
-select {
-  padding: 0.6rem;
-  background-color: var(--clr--netural-100);
-}
-
-select:focus {
-  border: 1px solid var(--clr--accent);
 }
 
 .project-selected {
@@ -682,7 +575,9 @@ select:focus {
 
 .delete-modal-body {
   background-color: var(--clr--netural-900);
-  width: 25rem;
+  max-width: 25rem; 
+  width: 80%;
+
   border-radius: 3px;
   box-shadow: 1px 1px 5px var(--clr-dark-grey);
 }
@@ -728,9 +623,7 @@ select:focus {
   cursor: pointer;
 }
 
-.check {
-  display: none;
-}
+
 .dm-label {
   font-weight: bold;
 }

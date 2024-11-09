@@ -1,6 +1,8 @@
 import { allTasks, todayTasks, weeklyTasks, completedTasks, importantTasks } from "./utils/taskFilters";
 import { clearElement, clearInput, clearSelectedIcon, populateEditTaskContainer } from "./utils/util";
-import { selectedProject, selectedTask, projects, setSelectedProject, setSelectedTask, findProject, importantFlag, setImportantFlag, addTask, editTask, deleteTask } from "./utils/constants";
+import { selectedProject, setSelectedProject, projects, findProject } from "./modules/project";
+import { setSelectedTask, selectedTask, addTask, editTask, deleteTask  } from "./modules/task";
+import { importantFlag, setImportantFlag } from "./modules/helper";
 import { saveAndRenderTask } from "./utils/storage";
 import { createTodoHeader } from "./components/TodoHeader";
 import createIcon from "./components/createIcon";
@@ -111,6 +113,7 @@ const addTaskEvents = () => {
 
         taskTitle.textContent = 'Add Task';
         taskEditBtn.textContent = 'Add';
+        headerDiv.classList.remove("active");
     })
 }
 
@@ -126,6 +129,7 @@ const infoModalEvents = () => {
 const addProjectEvents = () => {
     addProjectBtnContainer.addEventListener('click', () => {
         addProjectContainer.style.display = "flex";
+        headerDiv.classList.remove("active");
     })  
 
     addProjectBtn.addEventListener('click', addProject)
@@ -163,7 +167,6 @@ const buttonEvents = () => {
     });
 
     menuBtn.addEventListener('click', () => {
-        console.log(headerDiv)
         headerDiv.classList.toggle("active");
     })
 
@@ -173,20 +176,28 @@ const buttonEvents = () => {
   
     taskForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        const errorMsg = document.querySelector("[data-task-error-msg]");
         const taskFormBtn = taskForm.querySelector("[data-add-task-btn]")
         if (taskFormBtn.textContent == "Add") { 
-            addTask();
-            addTaskContainer.style.display = 'none';
+            const response = addTask();
+            if (response == 1) {
+                addTaskContainer.style.display = 'none';
+                errorMsg.classList.remove("show");
+            }
         } else {
             console.log("Done editing", selectedProject);
-            editTask();
-            if (importantFlag) {
-                importantTasks();
-            } else {
-                saveAndRenderTask();
+            const response = editTask();
+            if (response == 1) {
+                if (importantFlag) {
+                    importantTasks();
+                } else {
+                    saveAndRenderTask();
+                }
+                addTaskContainer.style.display = 'none';
+                errorMsg.classList.remove("show");
             }
-            addTaskContainer.style.display = 'none';
         }
+      
     });
 
     taskContainer.addEventListener('click', (e) => {
@@ -241,6 +252,7 @@ export const renderTask = (task) => {
         infoProject.textContent = projects.find(project => project.id == selectedProject.getAttribute("id")).name;
 
         infoModal.style.display = 'flex';
+        headerDiv.classList.remove("active");
     })
 
     taskEditBtn.addEventListener('click', () => {
@@ -259,6 +271,7 @@ export const renderTask = (task) => {
         setSelectedTask(taskEditBtn.closest("[data-task-body]"));
         findProject(taskEditBtn.closest("[data-task-body]").getAttribute("id"));
         populateEditTaskContainer();
+        headerDiv.classList.remove("active");
     })
 
     taskDeleteBtn.addEventListener('click', () => {
@@ -270,9 +283,10 @@ export const renderTask = (task) => {
         findProject(taskDeleteBtn.closest("[data-task-body]").getAttribute("id"));
         
         const taskId = selectedTask.getAttribute("id");
-        const projectId = selectedProject.getAttribute("id");
+        const projectId = selectedProject.getAttribute("id");   
 
         dmLabel.textContent = projects.find(project => project.id == projectId).tasks.find(task => task.id == taskId).title;
+        headerDiv.classList.remove("active");
     })
 
     taskCheckBox.addEventListener('click', () => {
@@ -317,6 +331,7 @@ export const renderProject = (projects) => {
             addProjectBtn.textContent = "Edit";
             infoEdit(selectedProject.getAttribute("id"))
             addProjectContainer.style.display = "flex";
+            headerDiv.classList.remove("active");
         })
         
         projectDeleteBtn.addEventListener('click', () => {
@@ -326,6 +341,7 @@ export const renderProject = (projects) => {
             setSelectedProject(projectDeleteBtn.closest(".project"));
             const project = projects.find(project => project.id == selectedProject.id);
             deleteLabel.textContent = `${project.name}`;
+            headerDiv.classList.remove("active");
         })
    
         projectE.addEventListener('click', () => {
@@ -339,11 +355,12 @@ export const renderProject = (projects) => {
             todoHeader.append(todoHeaderElement)
 
             addTask.style.display = 'flex';
+            headerDiv.classList.remove("active");
         })
 
         // Sets the id of the project
         projectE.setAttribute("id", project.id);
-        projectLabel.textContent = project.name;
+        projectLabel.textContent = project.name.length > 10 ? project.name.slice(0, 10) + '...' : project.name;
         projectContent.insertBefore(projectIcon, projectContent.firstElementChild);
         
         projectContainer.append(projectElement);
