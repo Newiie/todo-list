@@ -1,6 +1,6 @@
 import { saveAndRenderProject, saveAndRenderTask } from "../utils/storage";
 import { clearSelectedIcon } from "../utils/util";
-import { changeTodoHeaderTitle } from "../components/TodoHeader";
+import { changeTodoHeaderTitle } from "../components/todoHeader";
 import { removeProject , projects, selectedProject} from "../modules/project";
 import { setSelectedProjectArray, selectedProjectArray } from "../modules/helper";
 import createIcon from "../components/createIcon";

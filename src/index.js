@@ -4,7 +4,7 @@ import { selectedProject, setSelectedProject, projects, findProject } from "./mo
 import { setSelectedTask, selectedTask, addTask, editTask, deleteTask  } from "./modules/task";
 import { importantFlag, setImportantFlag } from "./modules/helper";
 import { saveAndRenderTask } from "./utils/storage";
-import { createTodoHeader } from "./components/TodoHeader";
+import { createTodoHeader } from "./components/todoHeader";
 import createIcon from "./components/createIcon";
 import { changeTaskInformation } from "./components/changeTaskInformation";
 import { createProject } from "./components/createProject";

@@ -1,5 +1,5 @@
 import { projects, selectedProject } from "../modules/project";
-import TaskForm from "../components/TaskForm";
+import TaskForm from "../components/taskForm";
 import { selectedTask } from "../modules/task";
 
 // Clears the icon-selected class from all icons

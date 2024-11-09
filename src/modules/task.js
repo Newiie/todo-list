@@ -1,6 +1,6 @@
 import { createTask } from "../components/createTask";
 import { saveAndRenderTask } from "../utils/storage";
-import TaskForm from "../components/TaskForm";
+import TaskForm from "../components/taskForm";
 import { selectedProject, projects } from "./project";
 
 let selectedTask = "";
