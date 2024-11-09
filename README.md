@@ -22,6 +22,6 @@
   * You can mark tasks as completed.
   * You can see what tasks are important and already completed.
 
-The live preview is [here.](https://todoappcenas.netlify.app/)
+The live preview is [here.](https://todo-list-cenas.netlify.app)
 
 Credits for [mooniDev](https://github.com/mooniiDev) , I used his design.  
