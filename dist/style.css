@@ -315,8 +315,6 @@
 
 form input, .add-project-input input {
   font-size: var(--fs-500);
-  margin-top: 0.5rem;
-  padding: 0.5rem;
   border-radius: 3px;
   border: 1px solid var(--clr-grey);
   outline: none;
