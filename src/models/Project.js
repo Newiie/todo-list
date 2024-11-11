@@ -2,7 +2,7 @@ import { saveAndRenderProject, saveAndRenderTask } from "../utils/storage";
 import { clearSelectedIcon } from "../utils/util";
 import { changeTodoHeaderTitle } from "../components/todoHeader";
 import { removeProject , projects, selectedProject, editProject} from "../modules/project";
-import { setSelectedProjectArray, selectedProjectArray } from "../modules/helper";
+import { setSelectedProject, setSelectedProjectArray, selectedProjectArray } from "../modules/helper";
 import createIcon from "../components/createIcon";
 const projectTitle = document.querySelector("[data-add-project-text-title]");
 
@@ -24,6 +24,7 @@ export const addProject = () => {
     const iconsContainer = document.querySelector("[data-icons-container]");
     const selectedIcon = iconsContainer.querySelector(".icon-selected");
     const errorMsg = addProjectContainer.querySelector("[data-ap-error-msg]");
+
     // Checks if the icon is selected and the project title is not empty
     if (!selectedIcon || projectTitle.value === '') {
        
@@ -45,10 +46,14 @@ export const addProject = () => {
     } else {
         selectedProjectArray.icon = iconID;
         selectedProjectArray.name = projectTitle.value;
-        editProject(selectedProject.id, iconID, projectTitle.value)
-        
-        saveAndRenderProject(projects);
 
+        editProject(selectedProject.id, iconID, projectTitle.value)
+
+        const currentProjectId = selectedProject.getAttribute("id");
+
+        saveAndRenderProject(projects);
+        
+        document.getElementById(currentProjectId).classList.add("project-selected");
         addProjectContainer.classList.remove("active");
         addProjectContainer.classList.add("inactive");
     }
@@ -56,16 +61,12 @@ export const addProject = () => {
     errorMsg.classList.remove("show");
 }
 
-
-
-
 export const deleteProject = () => {
     removeProject(selectedProject.id);
     saveAndRenderProject(projects);
     saveAndRenderTask();
     changeTodoHeaderTitle(null);
 }
-
 
 export const infoEdit = (id) => {
     const iconsContainer = document.querySelector("[data-icons-container]");

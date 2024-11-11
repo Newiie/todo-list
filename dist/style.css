@@ -121,25 +121,23 @@ z-index: 0;
 }
 
 .modal.active {
-  animation: fade-in 0.3s ease-in-out forwards;
+  animation: fade-in 0.3s ease-in forwards;
   visibility: visible;
   opacity: 1;
 } 
 
 .modal.inactive {
-  animation: fade-out 0.3s ease-in-out forwards;
+  animation: fade-out 0.3s forwards;
   visibility: hidden;
   opacity: 0;
 }
 
 @keyframes fade-out {
   from {
-    visibility: visible;
     opacity: 1;
     scale: 1;
   }
   to {
-    visibility: hidden;
     opacity: 0;
     scale: 0.9;
   }
@@ -147,12 +145,10 @@ z-index: 0;
 
 @keyframes fade-in {
   from {
-    visibility: hidden;
     opacity: 0;
     scale: 0.9;
   }
   to {
-    visibility: visible;
     opacity: 1;
     scale: 1;
   }
@@ -450,6 +446,7 @@ form input:focus, .add-project-input input:focus {
 
 .task-header-container {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding: 0 1rem;
 }
@@ -490,9 +487,9 @@ form input:focus, .add-project-input input:focus {
 
 
 .im-container {
-display: grid;
-grid-template-columns: 25% 70%;
-gap: 5%;
+  display: grid;
+  grid-template-columns: 25% 70%;
+  gap: 5%;
 }
 
 .im-container-title {
@@ -500,7 +497,24 @@ font-weight: bold;
 }
 
 /* MEDIA QUERIES */
-@media (max-width: 50em) {
+@media (max-width: 1024px) {
+  .side-bar {
+    --sb-track-color: white;
+    --sb-thumb-color: var(--clr--light-accent);
+    --sb-size: 0;
+    text-rendering: optimizeSpeed;
+}
+
+  .header-title {
+    font-size: var(--fs-700);
+  }
+
+  .ap-body > *:not(:first-child) {
+    margin: 0.5rem 1rem;
+  }
+}
+
+@media (max-width: 767px) {
 #container {
   display: flex;
   flex-direction: column;
@@ -509,7 +523,7 @@ font-weight: bold;
 
 .content {
   position: absolute;
-  top: 0;
+  top: 46.3px;
   left: -300px;
   z-index: 2;
   padding-top: 3rem;
@@ -530,6 +544,15 @@ font-weight: bold;
   padding: 1rem;
 }
 
+label,
+.modal p {
+  font-size: var(--fs-300);
+}
+
+.header-title {
+  font-size: var(--fs-600);
+}
+
 .todo-header {
   font-size: var(--fs-800);
 }
@@ -540,7 +563,6 @@ font-weight: bold;
 
 .menu {
   padding: 8px;
-  margin-right: 1rem;
   width: 1.6rem;
   aspect-ratio: 1;
   cursor: pointer;
@@ -587,7 +609,6 @@ font-weight: bold;
 }
 
 .modal-body {
-  width: 80%;
   margin: auto;
 }
 
