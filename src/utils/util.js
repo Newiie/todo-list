@@ -8,6 +8,13 @@ const clearSelectedIcon = () => {
     selectedIcons.forEach(si => si.classList.remove("icon-selected"));
 }
 
+const clearProjectSelectedClass = () => {
+    const projectSelected = document.querySelector(".project-selected");
+    if (projectSelected) {
+        projectSelected.classList.remove("project-selected");
+    }
+}
+
 // loops through the elements and removes the first child until there are no children left
 const clearElement = (elements) => {
     while (elements.firstElementChild) {
@@ -51,5 +58,6 @@ export {
     clearSelectedIcon, 
     clearElement, 
     clearInput, 
-    populateEditTaskContainer 
+    populateEditTaskContainer,
+    clearProjectSelectedClass
 }

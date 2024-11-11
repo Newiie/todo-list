@@ -1,5 +1,5 @@
 import { allTasks, todayTasks, weeklyTasks, completedTasks, importantTasks } from "./utils/taskFilters";
-import { clearElement, clearInput, clearSelectedIcon, populateEditTaskContainer } from "./utils/util";
+import { clearElement, clearInput, clearSelectedIcon, populateEditTaskContainer, clearProjectSelectedClass } from "./utils/util";
 import { selectedProject, setSelectedProject, projects, findProject } from "./modules/project";
 import { setSelectedTask, selectedTask, addTask, editTask, deleteTask  } from "./modules/task";
 import { importantFlag, setImportantFlag } from "./modules/helper";
@@ -66,8 +66,7 @@ const dueDateEvents = () => {
             todoHeader.innerHTML = val;
 
             // Deselect any previously selected project
-            if (document.querySelector(".project-selected"))
-                document.querySelector(".project-selected").classList.remove("project-selected");
+            clearProjectSelectedClass();
             e.target.classList.add("project-selected");
         }
     });
@@ -391,9 +390,15 @@ export const renderProject = (projects) => {
             todoHeader.append(projectIcon);
             todoHeader.append(todoHeaderElement)
 
-            // addTask.style.display = 'flex';
-            addTask.classList.remove("inactive");
-            addTask.classList.add("active");
+            addTask.classList.remove("check");
+      
+
+            clearProjectSelectedClass();
+            
+            setSelectedProject(projectE);
+            saveAndRenderTask();
+            projectE.classList.add("project-selected");
+
             headerDiv.classList.remove("active");
         })
 

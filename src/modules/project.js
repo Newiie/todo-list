@@ -11,6 +11,12 @@ const setProjects = (newProjects) => {
     projects = newProjects;
 }
 
+const editProject = (projectId, icon, name) => {
+    const project = projects.find(project => project.id == projectId);
+    project.icon = icon;
+    project.name = name;
+}
+
 const removeProject = (projectId) => {
     projects = projects.filter(project => project.id != projectId);
 }
@@ -26,5 +32,6 @@ export {
     setSelectedProject,
     setProjects,
     removeProject,
-    findProject
+    findProject,
+    editProject
 };

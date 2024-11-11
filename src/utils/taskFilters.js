@@ -8,6 +8,7 @@ const taskContainer = document.querySelector("[data-task-container]");
 // Renders all tasks
 export const allTasks = () => {
     clearElement(taskContainer);
+    
     setSelectedProject("All");
     projects.forEach(project => {
         if (project.tasks.length > 0) {
