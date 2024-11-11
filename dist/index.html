@@ -24,8 +24,8 @@
         <!-- HEADER -->
         <header class="header">
             <i class="fa-solid fa-bars menu" data-menu-btn></i>
-            <i class="fa-solid fa-check-double"></i>
-            ToDo
+            <i class="fa-solid fa-check-double" aria-label="logo icon"></i>
+            <span class="header-title" aria-label="ToDo">ToDo</span>
         </header>
 
         <!-- SIDEBAR -->
@@ -36,19 +36,19 @@
                 <nav class="due-date-container">
                     <ul class="due-dates" data-due-dates>
                         <li class="date project-selected" id="all-tasks" data-all-tasks>
-                            <i class="fa-regular fa-calendar-days"></i>
+                            <i class="fa-regular fa-calendar-days" aria-label="all-tasks"></i>
                             All</li>
                         <li class="date" id="today-tasks" data-today-tasks>
-                            <i class="fa-solid fa-calendar-day"></i>
+                            <i class="fa-solid fa-calendar-day" aria-label="today-tasks"></i>
                             Today</li>
                         <li class="date" id="weekly-tasks" data-weekly-tasks>
-                            <i class="fa-solid fa-calendar-week"></i>
+                            <i class="fa-solid fa-calendar-week" aria-label="weekly-tasks"></i>
                             Week</li>
                         <li class="date" id="important-tasks" data-important-tasks>
-                            <i class="fa-regular fa-calendar-days"></i>
+                            <i class="fa-regular fa-calendar-days" aria-label="important-tasks"></i>
                             Important</li>
                         <li class="date" id="completed-tasks" data-completed-tasks>
-                            <i class="fa-regular fa-calendar-check"></i>
+                            <i class="fa-regular fa-calendar-check" aria-label="completed-tasks"></i>
                             Completed</li>
                     </ul>
                 </nav>
@@ -57,26 +57,27 @@
                 <div class="projects">
                     <div class="projects-header">
                         <h5 class="projects-title">Projects</h5>
-                        <i class="fa-solid fa-circle-plus" data-add-project-btn></i>
+                        <i class="fa-solid fa-circle-plus" data-add-project-btn aria-label="add-project-button"></i>
                     </div>
                     <hr>
                     <p class="no-projects">Create some projects!</p>
                     <div class="projects-container" data-project-container>
                         <div class="project">
                             <div class="project-content">
-                                <i class="fa-solid fa-gear"></i>
+                                <i class="fa-solid fa-gear" aria-label="sample-project"></i>
                                 <p class="project-label">sample project</p>
                             </div>
                             <div class="editables">
-                                <i class="fa-regular fa-pen-to-square icon-editable"></i>
-                                <i class="fa-solid fa-trash icon-editable"></i>
+                                <i class="fa-regular fa-pen-to-square icon-editable" aria-label="edit-project-button"></i>
+                                <i class="fa-solid fa-trash icon-editable" aria-label="delete-project-button"></i>
                             </div>
                         </div>
                     </div>
                     <hr>
                 </div>
             </nav>
-                   <!-- FOOTER SECTION -->
+
+            <!-- FOOTER SECTION -->
             <footer class="credits-container">
                 <div class="credit">Crafted by <span class="clr-name">Newiie</span>
                     <div class="footer-icons-container">
@@ -90,17 +91,17 @@
                     </div>
                 </div>
             </footer>
-
         </section>
 
         <!-- CONTENT BODY -->
         <main class="todo-container">
+            
             <h1 class="todo-header" data-todo-header>Craft Another Project</h1>
             
             <div class="todo-body">
                 <div class="task-header-container">
                     <div class="task-header">Tasks</div>
-                    <i class="fa-solid fa-circle-plus check" data-add-task></i>
+                    <i class="fa-solid fa-circle-plus check" data-add-task aria-label="add task"></i>
                 </div>
                 <hr>
                 <!------------------------------------
@@ -111,20 +112,16 @@
             </div>
         </main>
     
-
- 
-    
-
         <!------------------------------------
         ------------MODALS AREA------------
         ------------------------------------->
 
         <!-- ADD PROJECT MODAL -->
         <div class="add-project modal" data-add-project-container>
-            <div class="ap-body">
+            <div class="ap-body modal-body">
                 <div class="add-project-title">
                     <h2>Add Project</h2>
-                    <i class="fa-solid fa-xmark apbody-close-btn" data-close-project-btn></i>
+                    <i class="fa-solid fa-xmark apbody-close-btn" data-close-project-btn aria-label="close modal"></i>
                 </div>
                 <div class="add-project-input">
                     <label for="title">Title*</label>
@@ -133,20 +130,20 @@
                 <div class="add-project-icon-container">
                     <p>Icon</p>
                     <div class="icons" data-icons-container>
-                        <div class="icon" id="fa-book"><i class="fa-solid fa-book"></i></div>
-                        <div class="icon" id="fa-hammer"><i class="fa-solid fa-hammer"></i></div>
-                        <div class="icon" id="fa-volleyball"><i class="fa-solid fa-volleyball"></i></div>
-                        <div class="icon" id="fa-sack-dollar"><i class="fa-solid fa-sack-dollar"></i></div>
-                        <div class="icon" id="fa-pizza-slice"><i class="fa-solid fa-pizza-slice"></i></div>
-                        <div class="icon" id="fa-school"><i class="fa-solid fa-school"></i></div>
-                        <div class="icon" id="fa-gift"><i class="fa-solid fa-gift"></i></div> 
+                        <div class="icon" id="fa-book"><i class="fa-solid fa-book" aria-label="book icon"></i></div>
+                        <div class="icon" id="fa-hammer"><i class="fa-solid fa-hammer" aria-label="hammer icon"></i></div>
+                        <div class="icon" id="fa-volleyball"><i class="fa-solid fa-volleyball" aria-label="volleyball icon"></i></div>
+                        <div class="icon" id="fa-sack-dollar"><i class="fa-solid fa-sack-dollar" aria-label="sack-dollar icon"></i></div>
+                        <div class="icon" id="fa-pizza-slice"><i class="fa-solid fa-pizza-slice" aria-label="pizza-slice icon"></i></div>
+                        <div class="icon" id="fa-school"><i class="fa-solid fa-school" aria-label="school icon"></i></div>
+                        <div class="icon" id="fa-gift"><i class="fa-solid fa-gift" aria-label="gift icon"></i></div> 
                     </div>
                 </div>
                 <p class="error-msg" data-ap-error-msg>All inputs are required</p>
                 <hr class="hr-90">
                 <div class="add-project-btns">
-                    <button class="cancel-btn" data-ap-cancel-btn>Cancel</button>
-                    <button class="add-btn" data-ap-add-btn>Add</button>
+                    <button class="cancel-btn" data-ap-cancel-btn aria-label="cancel-project-form">Cancel</button>
+                    <button class="add-btn" data-ap-add-btn aria-label="add-project-form">Add</button>
                 </div>
             </div>
         </div>
@@ -156,7 +153,7 @@
             <div class="add-task-body modal-body">
                 <div class="add-project-title">
                     <h2 class="modal-title" data-project-title>Add Task</h2>
-                    <i class="fa-solid fa-xmark apbody-close-btn" data-at-close-btn></i>
+                    <i class="fa-solid fa-xmark apbody-close-btn" data-at-close-btn aria-label="close-modal-task"></i>
                 </div>
                 <!-- TASK FORM -->
                 <form class="task-form" action="" data-task-form>
@@ -177,8 +174,8 @@
                     <p class="error-msg" data-task-error-msg>All inputs are required</p>
                     <hr>
                     <div class="add-project-btns">
-                        <button type="button" class="cancel-btn" data-at-cancel-btn>Cancel</button>
-                        <button class="add-btn" data-add-task-btn>Add</button>
+                        <button type="button" class="cancel-btn" data-at-cancel-btn aria-label="cancel-task-form">Cancel</button>
+                        <button class="add-btn" data-add-task-btn aria-label="add-task-form">Add</button>
                     </div>
                 </form>
             </div>
@@ -186,18 +183,18 @@
 
         <!-- DELETE MODAL -->
         <div class="delete-modal modal" data-delete-modal>
-            <div class="delete-modal-body">
+            <div class="delete-modal-body modal-body">
                 <div class="dm-header-container">
                     <h2>Delete Project</h2>
-                    <i class="fa-solid fa-xmark dm-close-btn" data-dm-close-button></i>
+                    <i class="fa-solid fa-xmark dm-close-btn" data-dm-close-button aria-label="close modal delete"></i>
                 </div>
                 <div class="dm-content">
                     <p>Are you sure?</p>
                     <p >Project <span class="dm-label"></span> will be gone forever!</p>
                     <hr>
                     <div class="dm-btns">
-                        <button class="cancel-btn" data-dm-cancel-btn>Cancel</button>
-                        <button class="delete-btn" data-dm-delete-btn>Delete</button>
+                        <button class="cancel-btn" data-dm-cancel-btn aria-label="cancel-delete-form">Cancel</button>
+                        <button class="delete-btn" data-dm-delete-btn aria-label="delete-project-form">Delete</button>
                     </div>
                 </div>
             </div>
@@ -208,7 +205,7 @@
             <div class="info-modal-body modal-body">
                 <div class="add-project-title">
                     <h2 class="modal-title"data-project-title>Task Info</h2>
-                    <i class="fa-solid fa-xmark apbody-close-btn" data-im-close-btn></i>
+                    <i class="fa-solid fa-xmark apbody-close-btn" data-im-close-btn aria-label="close modal info"></i>
                 </div>
                 <div class="info-modal-content">
                     <div class="im-container">
@@ -242,7 +239,7 @@
                     </div>
                     <hr>
                     <div class="add-project-btns">
-                        <button type="button" class="cancel-btn" data-info-cancel-btn>Cancel</button>
+                        <button type="button" class="cancel-btn" data-info-cancel-btn aria-label="cancel-info form">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -261,10 +258,10 @@
             </div>
             <div class="editables">
                 <button class="ic-btn">
-                    <i class="fa-regular fa-pen-to-square icon-editable" data-project-edit></i>
+                    <i class="fa-regular fa-pen-to-square icon-editable" data-project-edit aria-label="edit-project-button"></i>
                 </button>
                 <button class="ic-btn">
-                    <i class="fa-solid fa-trash icon-editable" data-project-delete-btn></i>
+                    <i class="fa-solid fa-trash icon-editable" data-project-delete-btn aria-label="delete-project-button"></i>
                 </button>
             </div>
         </div>
@@ -279,9 +276,9 @@
             </div>
             
             <div class="task-icon">
-                <i class="fa-regular fa-pen-to-square" data-task-edit></i>
-                <i class="fa-regular fa-trash-can" data-task-delete></i>
-                <i class="fa-solid fa-circle-info" data-task-info></i>
+                <i class="fa-regular fa-pen-to-square" data-task-edit aria-label="edit-task-button"></i>
+                <i class="fa-regular fa-trash-can" data-task-delete aria-label="delete-task-button"></i>
+                <i class="fa-solid fa-circle-info" data-task-info aria-label="info-task-button"></i>
             </div>
         </div>
     </template>

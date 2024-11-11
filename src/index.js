@@ -82,32 +82,45 @@ const dueDateEvents = () => {
 
 const deleteModalEvents = () => {
     dmCloseBtn.addEventListener('click', () => {
-        deleteModal.style.display = 'none'; 
+        // deleteModal.style.display = 'none'; 
+        deleteModal.classList.remove("active");
+        deleteModal.classList.add("inactive");
     })
 
     dmCancelBtn.addEventListener('click', () => {
-        deleteModal.style.display = 'none'; 
+        // deleteModal.style.display = 'none'; 
+        deleteModal.classList.remove("active");
+        deleteModal.classList.add("inactive");
     })
 
     dmDeleteBtn.addEventListener('click', () => {
         (deleteModal.getAttribute("id") == 'project-deletion') ? deleteProject() : deleteTask();
         deleteModal.removeAttribute("id");
-        deleteModal.style.display = 'none'; 
+        // deleteModal.style.display = 'none'; 
+        deleteModal.classList.remove("active");
+        deleteModal.classList.add("inactive");
     })
 }
 
 const addTaskEvents = () => {
     addTaskCancelBtn.addEventListener('click', () => {
-        addTaskContainer.style.display = 'none';
+        // addTaskContainer.style.display = 'none';
+        addTaskContainer.classList.remove("active");
+        addTaskContainer.classList.add("inactive");
     })
 
     addTaskCloseBtn.addEventListener('click', () => {
-        addTaskContainer.style.display = 'none';
+        // addTaskContainer.style.display = 'none';
+        addTaskContainer.classList.remove("active");
+        addTaskContainer.classList.add("inactive");
     })
 
     addTaskContainerBtn.addEventListener('click', () => {
         clearInput(addTaskContainer);
-        addTaskContainer.style.display = 'flex';
+        // addTaskContainer.style.display = 'flex';
+        addTaskContainer.classList.remove("inactive");
+        addTaskContainer.classList.add("active");
+
         const taskTitle = addTaskContainer.querySelector("[data-project-title]")
         const taskEditBtn = addTaskContainer.querySelector("[data-add-task-btn]");
 
@@ -119,23 +132,31 @@ const addTaskEvents = () => {
 
 const infoModalEvents = () => {
     infoModalCancelBtn.addEventListener('click', () => {
-        infoModal.style.display = 'none';
+        // infoModal.style.display = 'none';
+        infoModal.classList.remove("active");
+        infoModal.classList.add("inactive");
     })
     imCloseBtn.addEventListener('click', () => {
-        infoModal.style.display = 'none';
+        // infoModal.style.display = 'none';
+        infoModal.classList.remove("active");
+        infoModal.classList.add("inactive");
     })
 }
 
 const addProjectEvents = () => {
     addProjectBtnContainer.addEventListener('click', () => {
-        addProjectContainer.style.display = "flex";
+        // addProjectContainer.style.display = "flex";
+        addProjectContainer.classList.remove("inactive");
+        addProjectContainer.classList.add("active");
         headerDiv.classList.remove("active");
     })  
 
     addProjectBtn.addEventListener('click', addProject)
 
     closeProjectBtn.addEventListener('click', () => {
-        addProjectContainer.style.display = "none";
+        // addProjectContainer.style.display = "none";
+        addProjectContainer.classList.remove("active");
+        addProjectContainer.classList.add("inactive");
         const pcTitle = addProjectContainer.querySelector("h2");
         pcTitle.textContent = "Add Project";
         clearInput(addProjectContainer);
@@ -144,7 +165,9 @@ const addProjectEvents = () => {
     })
 
     apCancelBtn.addEventListener('click', () => {
-        addProjectContainer.style.display = "none";
+        // addProjectContainer.style.display = "none";
+        addProjectContainer.classList.remove("active");
+        addProjectContainer.classList.add("inactive");
         const pcTitle = addProjectContainer.querySelector("h2");
 
         pcTitle.textContent = "Add Project";
@@ -181,7 +204,9 @@ const buttonEvents = () => {
         if (taskFormBtn.textContent == "Add") { 
             const response = addTask();
             if (response == 1) {
-                addTaskContainer.style.display = 'none';
+                // addTaskContainer.style.display = 'none';
+                addTaskContainer.classList.remove("active");
+                addTaskContainer.classList.add("inactive");
                 errorMsg.classList.remove("show");
             }
         } else {
@@ -193,7 +218,9 @@ const buttonEvents = () => {
                 } else {
                     saveAndRenderTask();
                 }
-                addTaskContainer.style.display = 'none';
+                // addTaskContainer.style.display = 'none';
+                addTaskContainer.classList.remove("active");
+                addTaskContainer.classList.add("inactive");
                 errorMsg.classList.remove("show");
             }
         }
@@ -251,7 +278,9 @@ export const renderTask = (task) => {
         findProject(taskInfoBtn.closest("[data-task-body]").getAttribute("id"));
         infoProject.textContent = projects.find(project => project.id == selectedProject.getAttribute("id")).name;
 
-        infoModal.style.display = 'flex';
+        infoModal.classList.remove("inactive");
+        infoModal.classList.add("active");
+
         headerDiv.classList.remove("active");
     })
 
@@ -260,7 +289,10 @@ export const renderTask = (task) => {
         const taskFormEditBtn = addTaskContainer.querySelector("[data-add-task-btn]");
 
         clearInput(addTaskContainer);
-        addTaskContainer.style.display = 'flex';
+        // addTaskContainer.style.display = 'flex';
+        addTaskContainer.classList.remove("inactive");
+        addTaskContainer.classList.add("active");
+
         taskTitle.textContent = 'Edit Task';
         taskFormEditBtn.textContent = 'Edit';
 
@@ -275,7 +307,9 @@ export const renderTask = (task) => {
     })
 
     taskDeleteBtn.addEventListener('click', () => {
-        deleteModal.style.display = 'flex'; 
+        deleteModal.classList.remove("inactive");
+        deleteModal.classList.add("active");
+
         deleteModal.setAttribute("id", "task-deletion")
         const dmLabel = deleteModal.querySelector(".dm-label");
 
@@ -330,14 +364,17 @@ export const renderProject = (projects) => {
 
             addProjectBtn.textContent = "Edit";
             infoEdit(selectedProject.getAttribute("id"))
-            addProjectContainer.style.display = "flex";
+            addProjectContainer.classList.remove("inactive");
+            addProjectContainer.classList.add("active");
             headerDiv.classList.remove("active");
         })
         
         projectDeleteBtn.addEventListener('click', () => {
             const deleteLabel = deleteModal.querySelector(".dm-label");
             deleteModal.setAttribute("id", "project-deletion");
-            deleteModal.style.display = 'flex';
+            // deleteModal.style.display = 'flex';
+            deleteModal.classList.remove("inactive");
+            deleteModal.classList.add("active");
             setSelectedProject(projectDeleteBtn.closest(".project"));
             const project = projects.find(project => project.id == selectedProject.id);
             deleteLabel.textContent = `${project.name}`;
@@ -354,7 +391,9 @@ export const renderProject = (projects) => {
             todoHeader.append(projectIcon);
             todoHeader.append(todoHeaderElement)
 
-            addTask.style.display = 'flex';
+            // addTask.style.display = 'flex';
+            addTask.classList.remove("inactive");
+            addTask.classList.add("active");
             headerDiv.classList.remove("active");
         })
 

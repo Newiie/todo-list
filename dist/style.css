@@ -1,67 +1,67 @@
 :root {
-    --clr--accent: #00b3bb;
-    --clr--light-accent: #00e6aa;
-    --clr--neutral-100: #fff;
-    --clr--netural-900: #F0f0f0;
-    --clr-dark-grey: #757575;
-    --clr-grey: rgba(192, 192, 192, 0.7);
-    --clr-dark-red: #C46161;
-    --clr-red: #E67B7B;
-    --bg-modal: rgba(255,255,255,0.7);
+  --clr--accent: #00b3bb;
+  --clr--light-accent: #00e6aa;
+  --clr--neutral-100: #fff;
+  --clr--netural-900: #F0f0f0;
+  --clr-dark-grey: #757575;
+  --clr-grey: rgba(192, 192, 192, 0.7);
+  --clr-dark-red: #C46161;
+  --clr-red: #E67B7B;
+  --bg-modal: rgba(255,255,255,0.7);
 
-    --ff-lato: 'Lato', sans-serif;
-    --ff-roboto: 'Roboto', sans-serif;
+  --ff-lato: 'Lato', sans-serif;
+  --ff-roboto: 'Roboto', sans-serif;
 
-    --size-100: 0.25rem;
-    --size-200: 0.5rem;
-    --size-300: 0.75rem;
-    --size-400: 1rem;
-    --size-500: 1.5rem;
-    --size-600: 2rem;
-    --size-700: 3rem;
-    --size-800: 4rem;   
-    --size-900: 5rem; 
+  --size-100: 0.25rem;
+  --size-200: 0.5rem;
+  --size-300: 0.75rem;
+  --size-400: 1rem;
+  --size-500: 1.5rem;
+  --size-600: 2rem;
+  --size-700: 3rem;
+  --size-800: 4rem;   
+  --size-900: 5rem; 
 
-    --fw-regular: 400;
-    --fw-semi-bold: 500;
-    --fw-bold: 700;
+  --fw-regular: 400;
+  --fw-semi-bold: 500;
+  --fw-bold: 700;
 
-    --fs-300: 0.8125rem;
-    --fs-400: 1rem;
-    --fs-450: 1.0625rem;
-    --fs-500: 1.125rem;
-    --fs-550: 1.25rem;
-    --fs-600: 1.5625rem;
-    --fs-700: 1.875rem; 
-    --fs-800: 2rem;
-    --fs-900: 2.5rem;
-    --fs-950: 3.5rem;
+  --fs-300: 0.8125rem;
+  --fs-400: 1rem;
+  --fs-450: 1.0625rem;
+  --fs-500: 1.125rem;
+  --fs-550: 1.25rem;
+  --fs-600: 1.5625rem;
+  --fs-700: 1.875rem; 
+  --fs-800: 2rem;
+  --fs-900: 2.5rem;
+  --fs-950: 3.5rem;
 }
 
 
 /* INITIAL SETTINGS */
 @media (min-width: 50em) {
-    :root {
-      --fs-body: var(--fs-500);
-      --fs-primary-heading: var(--fs-900);
-      --fs-secondary-heading: var(--fs-800);
-      --fs-nav: var(--fs-300);
-    }
+  :root {
+    --fs-body: var(--fs-500);
+    --fs-primary-heading: var(--fs-900);
+    --fs-secondary-heading: var(--fs-800);
+    --fs-nav: var(--fs-300);
+  }
 }
 
 
 /* FONT SIZES */
 .date, .project-label {
-    font-size: var(--fs-450);
+  font-size: var(--fs-450);
 }
 
 .header {
-    font-size: var(--fs-600);
-    font-family: var(--ff-lato);
+  font-size: var(--fs-600);
+  font-family: var(--ff-lato);
 }
 
 .projects-header, .task-header {
-    font-size: var(--fs-500);
+  font-size: var(--fs-500);
 }
 
 .todo-header {
@@ -103,11 +103,12 @@
 
 /* TODO CONTAINER AND CONTENT */
 .todo-container, .content {
-  z-index: 0;
+z-index: 0;
 }
 
 /* BASE MODAL */
 .modal {
+  display: flex;
   position: absolute;
   justify-content: center;
   align-items: center;
@@ -115,7 +116,44 @@
   left: 0;
   width: 100%;
   height: 100%;
+  visibility: hidden;
+  opacity: 0;
 }
+
+.modal.active {
+  animation: fade-in 0.3s ease-in-out forwards;
+  visibility: visible;
+  opacity: 1;
+} 
+
+.modal.inactive {
+  animation: fade-out 0.3s ease-in-out forwards;
+  visibility: hidden;
+  opacity: 0;
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+    scale: 1;
+  }
+  to {
+    opacity: 0;
+    scale: 0.9;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    scale: 0.9;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
 
 .modal hr {
   margin: 0;
@@ -160,7 +198,7 @@
 .date:hover,
 .project:hover {
   outline: 1px solid var(--clr--accent);
-}
+  }
 
 .due-dates > *:not(:first-child) {
   margin-top: 1rem;
@@ -267,11 +305,8 @@
   gap: 0.675rem;
 }
 
-
-
 /* DISPLAY NONE */
 .add-project {
-  display: none;
   background-color: var(--bg-modal);
   color: var(--clr-dark-grey);
   overflow: hidden;
@@ -329,7 +364,7 @@ form input, .add-project-input input {
   padding: 0.2rem 0.5rem;
   border: 1px solid var(--clr-grey);
   outline: none;
-}
+  }
 
 form input:focus, .add-project-input input:focus {
   border: 1px solid var(--clr--accent);
@@ -418,7 +453,6 @@ form input:focus, .add-project-input input:focus {
 
 /* TASK CONTAINER AND INFO MODAL */
 .add-task-container, .info-modal {
-  display: none;
   background-color: var(--bg-modal);
 }
 
@@ -452,112 +486,114 @@ form input:focus, .add-project-input input:focus {
 
 
 .im-container {
-  display: grid;
-  grid-template-columns: 25% 70%;
-  gap: 5%;
+display: grid;
+grid-template-columns: 25% 70%;
+gap: 5%;
 }
 
 .im-container-title {
-  font-weight: bold;
+font-weight: bold;
 }
 
 /* MEDIA QUERIES */
 @media (max-width: 50em) {
-  #container {
-    display: flex;
-    flex-direction: column;
-    width: 100vw;
-  }
+#container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+}
 
-  .content {
-    position: absolute;
-    top: 0;
-    left: -300px;
-    z-index: 2;
-    padding-top: 3rem;
-    transition: .4s;
-  }
+.content {
+  position: absolute;
+  top: 0;
+  left: -300px;
+  z-index: 2;
+  padding-top: 3rem;
+  transition: .4s;
+}
 
-  .content.active {
-    left: 0;
-  }
-  
-  .todo-body {
-    width: max(80%, 40px);
-    overflow: hidden;
-    box-shadow: 1px 1px 3px var(--clr--netural-900);
-  }
+.content.active {
+  left: 0;
+}
 
-  .header {
-    padding: 1rem;
-  }
+.todo-body {
+  width: max(80%, 40px);
+  overflow: hidden;
+  box-shadow: 1px 1px 3px var(--clr--netural-900);
+}
 
-  .todo-header {
-    font-size: var(--fs-800);
-  }
+.header {
+  padding: 1rem;
+}
 
-  .task-form {
-    gap: 0.5rem;
-  } 
+.todo-header {
+  font-size: var(--fs-800);
+}
 
-  .menu {
-    padding: 8px;
-    margin-right: 1rem;
-    width: 1.6rem;
-    aspect-ratio: 1;
-    cursor: pointer;
-    opacity: 1;
-  }
+.task-form {
+  gap: 0.5rem;
+} 
 
-  .menu:hover {
-    color: var(--clr-dark-grey);
-  }
+.menu {
+  padding: 8px;
+  margin-right: 1rem;
+  width: 1.6rem;
+  aspect-ratio: 1;
+  cursor: pointer;
+  opacity: 1;
+}
 
-  .im-container {
-    display: flex;
-    margin-block: 0.5rem;
-  }
+.menu:hover {
+  color: var(--clr-dark-grey);
+}
 
-  
-  .desc-container {
-    display: block;
-  }
-  .im-desc-content {
-    width: 100%;
-  }
-  .desc-container > * {
-    margin: 0.5rem 0;
-  }
-  .im-desc-content {
-    padding: 0;
-    display: block;
-  }
+.im-container {
+  display: flex;
+  margin-block: 0.5rem;
+}
 
-  .add-project-icon-container .icons {
-    flex-wrap: wrap;
-  }
-  .cancel-btn,
-  .add-btn, 
-  .delete-btn {
-    margin-top: 0.5rem;
-  }
 
-  .modal-title {
-    font-size: var(--fs-550);
-  }
+.desc-container {
+  display: block;
+}
+.im-desc-content {
+  width: 100%;
+}
+.desc-container > * {
+  margin: 0.5rem 0;
+}
 
-  .modal-body {
-    width: 80%;
-    margin: auto;
-  }
 
-  .info-modal-content {
-    gap: 0;
-  }
+.im-desc-content {
+  padding: 0;
+  display: block;
+}
 
-  hr {
-    margin: 0.5rem 0;
-  }
+.add-project-icon-container .icons {
+  flex-wrap: wrap;
+}
+.cancel-btn,
+.add-btn, 
+.delete-btn {
+  margin-top: 0.5rem;
+}
+
+.modal-title {
+  font-size: var(--fs-550);
+}
+
+.modal-body {
+  width: 80%;
+  margin: auto;
+}
+
+.info-modal-content {
+  gap: 0;
+}
+
+hr {
+  margin: 0.5rem 0;
+}
 
 
 }
@@ -578,7 +614,6 @@ form input:focus, .add-project-input input:focus {
 
 /* Delete Modal */
 .delete-modal {
-  display: none;
   background-color: var(--bg-modal);
 }
 
