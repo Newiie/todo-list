@@ -134,7 +134,9 @@
   padding: 2.5rem 1.5rem;
   width: 15rem;
   color: var(--clr-dark-grey);
-  min-height: calc(100vh - 8.5625rem);
+  height: 100%;
+  max-height: calc(100vh - 8.5625rem);
+  overflow-y: scroll;
 }
 
 .header {
@@ -165,7 +167,7 @@
 }
 
 .due-date-container {
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
 }
 
 /* PROJECTS */
@@ -190,8 +192,16 @@
   margin: 5px;
   cursor: pointer;
 }
+
 .credits-container {
   text-align: center;
+}
+
+.footer-icons-container {
+  display: flex;
+  gap: 0.5rem; 
+  justify-content: center;
+  margin-top: 0.5rem;
 }
 
 /* TODO CONTAINER */
@@ -316,6 +326,7 @@
 form input, .add-project-input input {
   font-size: var(--fs-500);
   border-radius: 3px;
+  padding: 0.2rem 0.5rem;
   border: 1px solid var(--clr-grey);
   outline: none;
 }
@@ -625,4 +636,3 @@ form input:focus, .add-project-input input:focus {
 .dm-label {
   font-weight: bold;
 }
-

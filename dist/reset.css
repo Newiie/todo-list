@@ -42,9 +42,34 @@ html,
 body {
     height: 100%;
 }
+
 /* Set core body defaults */
-body {
+body, .nav-bar {
+    --sb-track-color: white;
+    --sb-thumb-color: var(--clr--light-accent);
+    --sb-size: 5px;
     text-rendering: optimizeSpeed;
+}
+
+body::-webkit-scrollbar, .nav-bar::-webkit-scrollbar {
+    width: var(--sb-size)
+}
+
+body::-webkit-scrollbar-track, .nav-bar::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 3px;
+}
+
+body::-webkit-scrollbar-thumb, .nav-bar::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 3px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+    body, .nav-bar {
+        scrollbar-color: var(--sb-thumb-color)
+                        var(--sb-track-color);
+    }
 }
 
 /* A elements that don't have a class get default styles */
