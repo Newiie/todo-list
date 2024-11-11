@@ -134,10 +134,12 @@ z-index: 0;
 
 @keyframes fade-out {
   from {
+    visibility: visible;
     opacity: 1;
     scale: 1;
   }
   to {
+    visibility: hidden;
     opacity: 0;
     scale: 0.9;
   }
@@ -145,10 +147,12 @@ z-index: 0;
 
 @keyframes fade-in {
   from {
+    visibility: hidden;
     opacity: 0;
     scale: 0.9;
   }
   to {
+    visibility: visible;
     opacity: 1;
     scale: 1;
   }

@@ -29,9 +29,9 @@
         </header>
 
         <!-- SIDEBAR -->
-        <section class="content side-bar" data-nav-bar>
+        <aside class="content side-bar" data-nav-bar>
             <!-- NAV BAR CONTAINER -->
-            <nav>
+            <section>
                 <!-- DUE DATES -->
                 <nav class="due-date-container">
                     <ul class="due-dates" data-due-dates>
@@ -75,7 +75,7 @@
                     </div>
                     <hr>
                 </div>
-            </nav>
+            </section>
 
             <!-- FOOTER SECTION -->
             <footer class="credits-container">
@@ -91,7 +91,7 @@
                     </div>
                 </div>
             </footer>
-        </section>
+        </aside>
 
         <!-- CONTENT BODY -->
         <main class="todo-container">
@@ -107,8 +107,8 @@
                 <!------------------------------------
                 ------------ TASKS AREA------------
                 ------------------------------------->
-                <div class="tasks-container" data-task-container>
-                </div>
+                <section class="tasks-container" data-task-container>
+                </section>
             </div>
         </main>
     
@@ -120,7 +120,7 @@
         <div class="add-project modal" data-add-project-container>
             <div class="ap-body modal-body">
                 <div class="add-project-title">
-                    <h2>Add Project</h2>
+                    <h1>Add Project</h1>
                     <i class="fa-solid fa-xmark apbody-close-btn" data-close-project-btn aria-label="close modal"></i>
                 </div>
                 <div class="add-project-input">
@@ -152,7 +152,7 @@
         <div class="add-task-container modal" data-add-task-container>
             <div class="add-task-body modal-body">
                 <div class="add-project-title">
-                    <h2 class="modal-title" data-project-title>Add Task</h2>
+                    <h1 class="modal-title" data-project-title>Add Task</h1>
                     <i class="fa-solid fa-xmark apbody-close-btn" data-at-close-btn aria-label="close-modal-task"></i>
                 </div>
                 <!-- TASK FORM -->
@@ -185,7 +185,7 @@
         <div class="delete-modal modal" data-delete-modal>
             <div class="delete-modal-body modal-body">
                 <div class="dm-header-container">
-                    <h2>Delete Project</h2>
+                    <h1>Delete Project</h1>
                     <i class="fa-solid fa-xmark dm-close-btn" data-dm-close-button aria-label="close modal delete"></i>
                 </div>
                 <div class="dm-content">
@@ -204,7 +204,7 @@
         <div class="info-modal modal" data-info-modal>
             <div class="info-modal-body modal-body">
                 <div class="add-project-title">
-                    <h2 class="modal-title"data-project-title>Task Info</h2>
+                    <h1 class="modal-title"data-project-title>Task Info</h1>
                     <i class="fa-solid fa-xmark apbody-close-btn" data-im-close-btn aria-label="close modal info"></i>
                 </div>
                 <div class="info-modal-content">
@@ -252,7 +252,7 @@
 
     <!-- PROJECT TEMPLATE -->
     <template id="project-template">
-        <div class="project">
+        <article class="project">
             <div class="project-content unclickable">
                 <p class="project-label "></p>
             </div>
@@ -264,12 +264,12 @@
                     <i class="fa-solid fa-trash icon-editable" data-project-delete-btn aria-label="delete-project-button"></i>
                 </button>
             </div>
-        </div>
+        </article>
     </template>
 
     <!-- TASK TEMPLATE -->
     <template id="task-template">
-        <div class="task" data-task-body>
+        <article class="task" data-task-body>
             <div class="task-content">
                 <input class="in-checkbox" type="checkbox" name="" id="" data-task-checkbox>
                 <p data-task-description></p>
@@ -280,7 +280,7 @@
                 <i class="fa-regular fa-trash-can" data-task-delete aria-label="delete-task-button"></i>
                 <i class="fa-solid fa-circle-info" data-task-info aria-label="info-task-button"></i>
             </div>
-        </div>
+        </article>
     </template>
 </body>
 </html>
