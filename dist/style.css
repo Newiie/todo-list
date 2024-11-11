@@ -82,9 +82,9 @@
   display: grid;
   grid-template-areas: 
   "header header header header"
-  "nav-bar todo-container todo-container todo-container "
-  "nav-bar todo-container todo-container todo-container "
-  "nav-bar todo-container todo-container todo-container "
+  "side-bar todo-container todo-container todo-container "
+  "side-bar todo-container todo-container todo-container "
+  "side-bar todo-container todo-container todo-container "
   ;
   grid-template-rows: calc(2rem + 1.5625rem) repeat(1, 1fr);
   grid-template-columns: 300px repeat(3,1fr);
@@ -125,11 +125,11 @@
 .menu {
   width: 1px;
   aspect-ratio: 1;
-  opacity: 0;
+  opacity: 0; 
 }
 
-.nav-bar {
-  grid-area: nav-bar;
+.side-bar {
+  grid-area: side-bar;
   background-color: var(--clr--netural-900);
   padding: 2.5rem 1.5rem;
   width: 15rem;

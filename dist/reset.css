@@ -44,29 +44,29 @@ body {
 }
 
 /* Set core body defaults */
-body, .nav-bar {
+body, .side-bar {
     --sb-track-color: white;
     --sb-thumb-color: var(--clr--light-accent);
     --sb-size: 5px;
     text-rendering: optimizeSpeed;
 }
 
-body::-webkit-scrollbar, .nav-bar::-webkit-scrollbar {
+body::-webkit-scrollbar, .side-bar::-webkit-scrollbar {
     width: var(--sb-size)
 }
 
-body::-webkit-scrollbar-track, .nav-bar::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track, .side-bar::-webkit-scrollbar-track {
     background: var(--sb-track-color);
     border-radius: 3px;
 }
 
-body::-webkit-scrollbar-thumb, .nav-bar::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb, .side-bar::-webkit-scrollbar-thumb {
     background: var(--sb-thumb-color);
     border-radius: 3px;
 }
 
 @supports not selector(::-webkit-scrollbar) {
-    body, .nav-bar {
+    body, .side-bar {
         scrollbar-color: var(--sb-thumb-color)
                         var(--sb-track-color);
     }

@@ -72,6 +72,10 @@ select:focus {
     border: 1px solid var(--clr--accent);
 }
 
+textarea:focus {
+    outline: 1px solid var(--clr--accent);
+}
+
 textarea {
     border: 1px solid var(--clr-grey);
     border-radius: 3px;

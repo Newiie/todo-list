@@ -27,11 +27,13 @@
             <i class="fa-solid fa-check-double"></i>
             ToDo
         </header>
-        <nav class="content" data-nav-bar>
-            <!-- NAV BAR -->
-            <div class="nav-bar">
+
+        <!-- SIDEBAR -->
+        <section class="content side-bar" data-nav-bar>
+            <!-- NAV BAR CONTAINER -->
+            <nav>
                 <!-- DUE DATES -->
-                <div class="due-date-container">
+                <nav class="due-date-container">
                     <ul class="due-dates" data-due-dates>
                         <li class="date project-selected" id="all-tasks" data-all-tasks>
                             <i class="fa-regular fa-calendar-days"></i>
@@ -49,7 +51,7 @@
                             <i class="fa-regular fa-calendar-check"></i>
                             Completed</li>
                     </ul>
-                </div>
+                </nav>
 
                 <!-- LIST OF PROJECTS -->
                 <div class="projects">
@@ -73,22 +75,23 @@
                     </div>
                     <hr>
                 </div>
-                <footer class="credits-container">
-                    <div class="credit">Crafted by <span class="clr-name">Newiie</span>
-                        <div class="footer-icons-container">
-                            <a href="https://github.com/Newiie" target="_blank">
-                                <i class="fa-brands fa-github ic-btn"></i>
-                            </a>
-                            
-                            <a href="https://www.linkedin.com/in/jethro-cenas-898083233/" target="_blank">
-                                <i class="fa-brands fa-linkedin ic-btn"></i>
-                            </a>
-                        </div>
-                    </div>
-                </footer>
-            </div>
-        </nav>
+            </nav>
+                   <!-- FOOTER SECTION -->
+            <footer class="credits-container">
+                <div class="credit">Crafted by <span class="clr-name">Newiie</span>
+                    <div class="footer-icons-container">
+                        <a href="https://github.com/Newiie" target="_blank">
+                            <i class="fa-brands fa-github ic-btn"></i>
+                        </a>
 
+                        <a href="https://www.linkedin.com/in/jethro-cenas-898083233/" target="_blank">
+                            <i class="fa-brands fa-linkedin ic-btn"></i>
+                        </a>
+                    </div>
+                </div>
+            </footer>
+
+        </section>
 
         <!-- CONTENT BODY -->
         <main class="todo-container">
@@ -107,7 +110,10 @@
                 </div>
             </div>
         </main>
+    
 
+ 
+    
 
         <!------------------------------------
         ------------MODALS AREA------------
