@@ -3,6 +3,12 @@ import { saveAndRenderTask } from "../utils/storage";
 import TaskForm from "../components/taskForm";
 import { selectedProject, projects } from "./project";
 
+/*
+ * This module manages tasks using a functional approach.
+ * It provides CRUD operations for tasks model and ensures encapsulation. (kind of)
+ * I did not add getters because it is already incorporated to use projects variable
+ */
+
 let selectedTask = "";
 
 const setSelectedTask = (task) => {

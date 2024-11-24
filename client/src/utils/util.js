@@ -2,6 +2,11 @@ import { projects, selectedProject } from "../modules/project";
 import TaskForm from "../components/taskForm";
 import { selectedTask } from "../modules/task";
 
+/*
+ * These are helper functions for dynamic functionality
+ */
+
+
 // Clears the icon-selected class from all icons
 const clearSelectedIcon = () => {
     const selectedIcons = document.querySelectorAll(".icon-selected");

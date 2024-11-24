@@ -3,7 +3,7 @@ import { clearElement, clearInput, clearSelectedIcon, populateEditTaskContainer,
 import { selectedProject, setSelectedProject, projects, findProject } from "./modules/project";
 import { setSelectedTask, selectedTask, addTask, editTask, deleteTask  } from "./modules/task";
 import { importantFlag, setImportantFlag } from "./modules/helper";
-import { saveAndRenderTask } from "./utils/storage";
+import { saveAndRenderTask, loadProjects } from "./utils/storage";
 import { createTodoHeader } from "./components/todoHeader";
 import createIcon from "./components/createIcon";
 import { changeTaskInformation } from "./components/changeTaskInformation";
@@ -339,7 +339,7 @@ export const renderTask = (task) => {
 // ---------- Render a projects based on the projects array ---------------
 export const renderProject = (projects) => {
     clearElement(projectContainer);
-
+    console.log("PROEJCTS", projects)
     projects.forEach(project => {
         const projectIcon = createIcon(project.icon);
         const { projectElement,projectContent, projectLabel, iconEditable, projectE, projectDeleteBtn} = createProject();
@@ -411,6 +411,7 @@ export const renderProject = (projects) => {
 // ------ BIND ALL EVENTS ---------------
 const events = () => {
     buttonEvents();
+    loadProjects();
     dueDateEvents();
     iconsEvent();
     renderProject(projects);

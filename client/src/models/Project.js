@@ -6,6 +6,12 @@ import { setSelectedProject, setSelectedProjectArray, selectedProjectArray } fro
 import createIcon from "../components/createIcon";
 const projectTitle = document.querySelector("[data-add-project-text-title]");
 
+/* 
+ * This module manages the DOM interaction for the projects using a functional approach.
+ * Its primary function are to modularized the use of projects  and the DOM operations
+ */
+
+
 // creates a new project object
 const ProjectModel = (name, icon, tasks) => {
     return {
@@ -57,7 +63,7 @@ export const addProject = () => {
         addProjectContainer.classList.remove("active");
         addProjectContainer.classList.add("inactive");
     }
-
+    addProjectBtn.textContent = "Add";
     errorMsg.classList.remove("show");
 }
 

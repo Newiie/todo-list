@@ -1,7 +1,16 @@
 import { getProjects, getSelectedProject } from "../utils/storage";
 
+/*
+ * This module manages projects using a functional approach.
+ * It provides CRUD operations for projects model and ensures encapsulation. (kind of)
+ * I did not add getters because it is already incorporated to use projects variable
+ */
+
+
+// Variables
 let selectedProject = getSelectedProject();
-let projects = getProjects();
+let projects = [];
+
 
 const setSelectedProject = (project) => {
     selectedProject = project;
